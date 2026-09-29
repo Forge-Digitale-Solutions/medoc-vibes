@@ -1,0 +1,23 @@
+{
+  "name": "@medoc-vibes/shared",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Contrats partagés Médoc Vibes (types, OpenAPI stub)",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}

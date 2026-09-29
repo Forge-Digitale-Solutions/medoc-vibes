@@ -1,0 +1,23 @@
+{
+  "name": "medoc-vibes",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Monorepo Médoc Vibes — API AdonisJS, ops Next.js, site, packages shared, stubs iOS/Android",
+  "workspaces": [
+    "api",
+    "ops",
+    "site",
+    "packages/shared"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w @medoc-vibes/api",
+    "dev:ops": "npm run dev -w @medoc-vibes/ops",
+    "dev:site": "npm run dev -w @medoc-vibes/site",
+    "build:api": "npm run build -w @medoc-vibes/api",
+    "build:ops": "npm run build -w @medoc-vibes/ops",
+    "build:site": "npm run build -w @medoc-vibes/site"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
