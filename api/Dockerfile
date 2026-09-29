@@ -17,6 +17,7 @@ RUN node ace build
 
 FROM base AS runner
 WORKDIR /app
+# Dokploy (or the orchestrator) sets/publishes PORT; default is a fallback only.
 ENV HOST=0.0.0.0
 ENV PORT=3333
 EXPOSE 3333
