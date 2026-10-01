@@ -1,4 +1,3 @@
-import { ExploreCta } from "./explore-cta";
 import { HeroPlane } from "./hero-plane";
 import { Reveal } from "./reveal";
 import { StoreBadge } from "./store-badge";
@@ -67,12 +66,9 @@ export function LandingPage({ tagline }: LandingPageProps) {
               </p>
             </Reveal>
 
-            <Reveal delay={0.44} className="flex flex-col gap-[18px]">
-              <div id="telecharger" className="flex flex-wrap gap-3">
-                <StoreBadge store="apple" variant="light" />
-                <StoreBadge store="google" variant="light" />
-              </div>
-              <ExploreCta />
+            <Reveal delay={0.44} id="telecharger" className="flex flex-wrap gap-3">
+              <StoreBadge store="apple" variant="light" />
+              <StoreBadge store="google" variant="light" />
             </Reveal>
           </div>
         </div>
