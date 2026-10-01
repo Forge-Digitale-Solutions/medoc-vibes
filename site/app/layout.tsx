@@ -19,7 +19,7 @@ const archivo = Archivo({
 export const metadata: Metadata = {
   title: "Médoc Vibes — manger, sortir, bouger",
   description:
-    "L’app loisir du Médoc : restos, sorties, marchés, vides-greniers et surf. Complémentaire à l’app du Parc naturel régional.",
+    "L’app festif et loisir du Médoc : restos, sorties, marchés, vides-greniers et surf — la vie locale, près de toi.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
