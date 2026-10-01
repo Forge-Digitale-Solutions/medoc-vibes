@@ -103,8 +103,8 @@ export function LandingPage({ tagline }: LandingPageProps) {
             as="p"
             className="m-0 max-w-[720px] text-[clamp(19px,1.6vw,23px)] leading-[1.45] font-medium text-ink-soft text-pretty"
           >
-            Médoc Vibes, c’est l’app festif et loisir du territoire : où manger, où sortir, les
-            marchés, les vides-greniers, le surf et la côte — la vie locale, pas les sentiers.
+            Médoc Vibes, c’est l’app festif et loisir du Médoc : où manger, où sortir, les marchés,
+            les vides-greniers, le surf et la côte.
           </Reveal>
         </div>
       </section>
@@ -227,7 +227,7 @@ export function LandingPage({ tagline }: LandingPageProps) {
             delay={0.22}
             className="flex flex-wrap items-baseline gap-x-3.5 gap-y-2 text-[17px] font-semibold"
           >
-            <span className="text-ink-muted">Connexion en un geste :</span>
+            <span className="text-ink-muted">Connexion :</span>
             <span className="font-extrabold">Google · Apple · Facebook · lien magique par e-mail</span>
           </Reveal>
         </div>

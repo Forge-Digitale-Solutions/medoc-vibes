@@ -13,7 +13,7 @@ export function WaitlistForm() {
       setStatus("error");
       return;
     }
-    // Local mock — no backend yet (Dokploy later).
+    // Local mock: no backend yet (Dokploy later).
     setStatus("ok");
     setEmail("");
   }
@@ -49,7 +49,7 @@ export function WaitlistForm() {
       </form>
       {status === "ok" && (
         <p className="text-sm font-semibold" role="status">
-          Merci — on vous prévient au lancement.
+          Merci. On vous prévient au lancement.
         </p>
       )}
       {status === "error" && (

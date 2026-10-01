@@ -10,7 +10,7 @@ export function StoreBadge({ store, variant = "light" }: StoreBadgeProps) {
   const label = store === "apple" ? "Télécharger dans" : "Disponible sur";
   const name = store === "apple" ? "l'App Store" : "Google Play";
   const src = store === "apple" ? "/store/apple.svg" : "/store/google-play.svg";
-  const aria = `${name} — bientôt disponible`;
+  const aria = `${name}, bientôt disponible`;
 
   return (
     <span className="relative inline-flex">

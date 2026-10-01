@@ -1,4 +1,4 @@
-# Site — landing Médoc Vibes
+# Site : landing Médoc Vibes
 
 Landing marketing Next.js (App Router, TypeScript, Tailwind). Fidèle au board Claude Design ; charte Anton + Archivo, palette forêt / accent / sol clair.
 
@@ -22,4 +22,4 @@ SVG : `public/store/apple.svg`, `public/store/google-play.svg` (copie store Proj
 ## Dokploy (plus tard)
 
 Déployer `site/` comme service Node/Next séparé (même stack monorepo que `api/` / `ops/`).  
-Dokploy injecte `PORT` — ne pas hardcoder le port public. Le port **43127** est uniquement pour le dev local.
+Dokploy injecte `PORT` : ne pas hardcoder le port public. Le port **43127** est uniquement pour le dev local.
