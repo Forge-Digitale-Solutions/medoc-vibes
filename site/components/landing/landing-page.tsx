@@ -28,9 +28,6 @@ export function LandingPage({ tagline }: LandingPageProps) {
             </span>
             Médoc, Gironde
           </div>
-          <a href="#partenaires" className="text-ground no-underline hover:text-accent">
-            Partenaires
-          </a>
           <a
             href="#telecharger"
             className="border-b-2 border-accent pb-0.5 text-ground no-underline hover:text-accent"
@@ -66,9 +63,11 @@ export function LandingPage({ tagline }: LandingPageProps) {
               </p>
             </Reveal>
 
-            <Reveal delay={0.44} id="telecharger" className="flex flex-wrap gap-3">
-              <StoreBadge store="apple" variant="light" />
-              <StoreBadge store="google" variant="light" />
+            <Reveal delay={0.44}>
+              <div id="telecharger" className="flex flex-wrap gap-3">
+                <StoreBadge store="apple" variant="light" />
+                <StoreBadge store="google" variant="light" />
+              </div>
             </Reveal>
           </div>
         </div>
@@ -88,41 +87,25 @@ export function LandingPage({ tagline }: LandingPageProps) {
           </div>
           <h2 className="m-0 flex flex-col font-display text-[clamp(52px,7.6vw,124px)] leading-[0.92] font-normal uppercase">
             <Reveal as="span" delay={0} dx={-20}>
-              Le Parc,
-            </Reveal>
-            <Reveal as="span" delay={0.11} dx={-20}>
-              pour la nature.
+              Le Médoc qui vit,
             </Reveal>
             <Reveal
               as="span"
-              delay={0.22}
+              delay={0.11}
               dx={20}
               className="mt-[0.08em] self-start bg-accent px-[0.12em]"
             >
-              Médoc Vibes,
-            </Reveal>
-            <Reveal as="span" delay={0.33} dx={20} className="self-start bg-accent px-[0.12em]">
-              pour la vie locale.
+              près de toi.
             </Reveal>
           </h2>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,400px),1fr))] gap-10 gap-x-[72px]">
-            <Reveal delay={0.11} className="flex flex-col gap-3">
-              <div className="text-[15px] font-extrabold tracking-wide text-ink-muted uppercase">
-                Parc naturel régional Médoc
-              </div>
-              <p className="m-0 text-[clamp(19px,1.6vw,23px)] leading-[1.45] font-medium text-ink-soft text-pretty">
-                L&apos;application des balades, de la faune et des réserves naturelles.
-                Complémentaire, pas concurrente.
-              </p>
-            </Reveal>
-            <Reveal delay={0.22} className="flex flex-col gap-3">
-              <div className="text-[15px] font-extrabold tracking-wide uppercase">Médoc Vibes</div>
-              <p className="m-0 text-[clamp(19px,1.6vw,23px)] leading-[1.45] font-semibold text-pretty">
-                Où déjeuner, où sortir le soir, le marché du samedi, le vide-grenier du dimanche, la
-                session de surf à marée haute.
-              </p>
-            </Reveal>
-          </div>
+          <Reveal
+            delay={0.22}
+            as="p"
+            className="m-0 max-w-[720px] text-[clamp(19px,1.6vw,23px)] leading-[1.45] font-medium text-ink-soft text-pretty"
+          >
+            Médoc Vibes, c’est l’app festif et loisir du territoire : où manger, où sortir, les
+            marchés, les vides-greniers, le surf et la côte — la vie locale, pas les sentiers.
+          </Reveal>
         </div>
       </section>
 
@@ -144,12 +127,12 @@ export function LandingPage({ tagline }: LandingPageProps) {
               <Reveal
                 key={c.label}
                 delay={Math.min(i, 3) * 0.11}
-                className="group mx-[-16px] flex flex-wrap items-center justify-between gap-x-8 gap-y-1.5 border-b-2 border-forest-mid px-4 py-[clamp(14px,1.8vw,22px)] transition-colors duration-300 hover:bg-accent hover:text-forest"
+                className="group mx-[-16px] grid grid-cols-1 items-center gap-2 border-b-2 border-forest-mid px-4 py-[clamp(14px,1.8vw,22px)] transition-colors duration-300 md:grid-cols-[minmax(0,1fr)_minmax(200px,340px)] md:gap-x-10 hover:bg-accent hover:text-forest"
               >
-                <div className="font-display text-[clamp(44px,7.4vw,118px)] leading-[0.95] font-normal uppercase">
+                <div className="min-w-0 font-display text-[clamp(36px,6.2vw,96px)] leading-[0.95] font-normal uppercase">
                   {c.label}
                 </div>
-                <div className="max-w-[340px] text-[clamp(15px,1.3vw,18px)] leading-normal font-medium text-pretty">
+                <div className="text-[clamp(15px,1.3vw,18px)] leading-normal font-medium text-pretty md:text-right">
                   {c.desc}
                 </div>
               </Reveal>
@@ -182,8 +165,7 @@ export function LandingPage({ tagline }: LandingPageProps) {
             <Reveal delay={0.11} className="flex flex-col gap-2.5">
               <div className="text-xl font-extrabold">Des sources publiques</div>
               <p className="m-0 text-[17px] leading-normal font-medium text-pretty">
-                Fiches des offices de tourisme (DATAtourisme) et agendas publics (OpenAgenda),
-                complétés par les lieux partenaires.
+                Fiches des offices de tourisme (DATAtourisme) et agendas publics (OpenAgenda).
               </p>
             </Reveal>
             <Reveal delay={0.22} className="flex flex-col gap-2.5">
@@ -201,20 +183,6 @@ export function LandingPage({ tagline }: LandingPageProps) {
               </p>
             </Reveal>
           </div>
-          <Reveal
-            delay={0.22}
-            className="flex max-w-full items-center gap-3.5 self-start rounded-xl border-2 border-dashed border-white px-5 py-4"
-          >
-            <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden>
-              <path
-                fill="currentColor"
-                d="M4 4h16v4H4V4zm0 6h10v2H4v-2zm0 4h16v2H4v-2zm0 4h10v2H4v-2z"
-              />
-            </svg>
-            <span className="text-[17px] leading-snug font-bold">
-              Peu d&apos;annonces cette semaine — ajouter la vôtre
-            </span>
-          </Reveal>
         </div>
       </section>
 
@@ -265,55 +233,6 @@ export function LandingPage({ tagline }: LandingPageProps) {
         </div>
       </section>
 
-      <section id="partenaires" className="bg-forest py-[clamp(80px,10vw,150px)] text-ground">
-        <div className="mx-auto flex max-w-[1312px] flex-col gap-[clamp(40px,5vw,64px)] px-[clamp(20px,5vw,64px)]">
-          <div className="text-[13px] font-bold tracking-[1.6px] text-sage uppercase">
-            05 · Partenaires
-          </div>
-          <h2 className="m-0 flex flex-col font-display text-[clamp(48px,7vw,112px)] leading-[0.92] font-normal uppercase">
-            <Reveal as="span" delay={0} dx={-20}>
-              Faire vivre le Médoc,
-            </Reveal>
-            <Reveal as="span" delay={0.11} dx={20} className="text-accent">
-              et le faire savoir.
-            </Reveal>
-          </h2>
-          <Reveal
-            delay={0.11}
-            as="p"
-            className="m-0 max-w-[620px] text-[clamp(18px,1.5vw,21px)] leading-normal font-medium text-mist text-pretty"
-          >
-            Bars, restaurants, guinguettes, marchés, écoles de surf, comités des fêtes : chaque
-            partenaire gère sa fiche directement.
-          </Reveal>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,380px),1fr))] gap-10 gap-x-14">
-            <Reveal delay={0.11} className="flex flex-col gap-2.5 border-t-4 border-ground pt-[22px]">
-              <div className="font-display text-[clamp(34px,3.4vw,52px)] leading-none font-normal uppercase">
-                Essentiel
-              </div>
-              <p className="m-0 text-lg leading-normal font-medium text-mist text-pretty">
-                Une fiche complète et à jour : horaires, liens, dates, photos.
-              </p>
-            </Reveal>
-            <Reveal delay={0.22} className="flex flex-col gap-2.5 border-t-4 border-accent pt-[22px]">
-              <div className="font-display text-[clamp(34px,3.4vw,52px)] leading-none font-normal text-accent uppercase">
-                Premium boost
-              </div>
-              <p className="m-0 text-lg leading-normal font-medium text-mist text-pretty">
-                Mise en avant dans les recommandations, au plus près des visiteurs, au bon moment.
-              </p>
-            </Reveal>
-          </div>
-          <a
-            href="#partenaires"
-            className="flex h-14 items-center gap-2.5 self-start rounded-lg bg-accent px-6 text-[17px] font-extrabold text-forest no-underline transition-colors hover:bg-ground"
-          >
-            Devenir partenaire
-            <span aria-hidden>→</span>
-          </a>
-        </div>
-      </section>
-
       <section className="bg-accent pt-[clamp(80px,10vw,150px)] text-forest">
         <div className="mx-auto flex max-w-[1312px] flex-col gap-[clamp(32px,4vw,52px)] px-[clamp(20px,5vw,64px)]">
           <h2 className="m-0 flex flex-col font-display text-[clamp(64px,11vw,184px)] leading-[0.88] font-normal uppercase">
@@ -342,8 +261,6 @@ export function LandingPage({ tagline }: LandingPageProps) {
           <div className="font-display text-[28px] leading-none font-normal text-ground uppercase">
             Médoc <span className="text-accent">Vibes</span>
           </div>
-          <div>Lacanau · Hourtin · Soulac-sur-Mer · Pauillac · Le Verdon</div>
-          <div>Pour randonner et observer : l&apos;application du Parc naturel régional Médoc.</div>
           <div className="flex gap-5">
             <a href="#mentions" className="text-mist no-underline hover:text-accent">
               Mentions légales
