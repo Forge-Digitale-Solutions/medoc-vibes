@@ -1,1 +1,76 @@
 @import "tailwindcss";
+
+@theme inline {
+  --color-forest: #0f2a1d;
+  --color-forest-mid: #24443a;
+  --color-accent: #86cf5e;
+  --color-ground: #f5f6f1;
+  --color-mist: #cfe3d2;
+  --color-sage: #9db8a5;
+  --color-ink-soft: #26332b;
+  --color-ink-muted: #3c4a41;
+  --color-estuary: #2f7f86;
+  --color-estuary-deep: #235f65;
+  --font-display: var(--font-anton);
+  --font-body: var(--font-archivo);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-forest);
+  color: var(--color-forest);
+  font-family: var(--font-body), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes mv-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes mv-drift-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.mv-drift {
+  animation: mv-drift 22s linear infinite;
+}
+
+.mv-drift-fast {
+  animation: mv-drift 14s linear infinite reverse;
+}
+
+.mv-drift-tide {
+  animation: mv-drift 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .mv-drift,
+  .mv-drift-fast,
+  .mv-drift-tide {
+    animation: none !important;
+  }
+
+  .mv-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
