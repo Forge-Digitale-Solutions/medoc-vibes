@@ -30,7 +30,7 @@ export default function MentionsLegalesPage() {
           </p>
           <ul className="m-0 list-disc space-y-1 pl-5">
             <li>Forme juridique : entrepreneur individuel</li>
-            <li>Siège social : 6 rue Saint-Julien, 33112 Saint-Laurent-Médoc</li>
+            <li>Siège social : 33112 Saint-Laurent-Médoc</li>
             <li>SIRET : 100 857 838 00013</li>
             <li>Immatriculation : RNE n° 100 857 838</li>
             <li>Directeur de la publication : Anthony Marcelin</li>
