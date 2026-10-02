@@ -36,10 +36,12 @@ export default function MentionsLegalesPage() {
             <li>Directeur de la publication : Anthony Marcelin</li>
             <li>
               Contact :{" "}
-              <a href="/contact" className="font-semibold text-forest underline">
+              <a
+                href="mailto:contact@medocvibes.fr"
+                className="font-semibold text-forest underline"
+              >
                 contact@medocvibes.fr
-              </a>{" "}
-              (adresse en cours de création)
+              </a>
             </li>
           </ul>
         </section>
@@ -88,11 +90,13 @@ export default function MentionsLegalesPage() {
           </p>
           <p className="m-0">
             Pour exercer vos droits (accès, rectification, effacement, opposition), écrivez à{" "}
-            <a href="/contact" className="font-semibold text-forest underline">
+            <a
+              href="mailto:contact@medocvibes.fr"
+              className="font-semibold text-forest underline"
+            >
               contact@medocvibes.fr
-            </a>{" "}
-            dès que la boîte sera opérationnelle. Vous pouvez aussi saisir la CNIL
-            (www.cnil.fr).
+            </a>
+            . Vous pouvez aussi saisir la CNIL (www.cnil.fr).
           </p>
         </section>
 

@@ -71,7 +71,13 @@ export default function PartenairesPage() {
           </span>
         </Link>
         <p className="m-0 text-sm font-medium text-ink-muted">
-          E-mail public bientôt : contact@medocvibes.fr
+          E-mail :{" "}
+          <a
+            href="mailto:contact@medocvibes.fr"
+            className="font-semibold text-forest underline"
+          >
+            contact@medocvibes.fr
+          </a>
         </p>
       </div>
     </SiteChrome>
