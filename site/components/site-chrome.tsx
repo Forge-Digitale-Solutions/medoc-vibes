@@ -69,23 +69,16 @@ export function SiteFooter({
   );
 
   return (
-    <footer className="bg-forest px-0 py-10 pb-12 text-mist">
-      <div className="mx-auto flex max-w-[1312px] flex-col gap-6 px-[clamp(20px,5vw,64px)] text-sm leading-normal font-medium">
-        <div className="flex flex-wrap items-baseline justify-between gap-5 gap-x-10">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2.5 font-display text-[28px] leading-none font-normal text-ground uppercase no-underline"
-          >
-            <BrandMark size={32} />
-            Médoc <span className="text-accent">Vibes</span>
-          </Link>
-          <div className="flex flex-wrap gap-5">
-            {link("/partenaires", "Partenaires", "partenaires")}
-            {link("/mentions-legales", "Mentions légales", "mentions")}
-            {link("/contact", "Contact", "contact")}
-          </div>
-        </div>
-        <p className="m-0 text-mist/80">
+    <footer className="bg-forest px-0 py-8 text-mist">
+      <div className="mx-auto flex max-w-[1312px] flex-wrap items-center justify-between gap-x-8 gap-y-3 px-[clamp(20px,5vw,64px)] text-sm leading-normal font-medium">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2.5 font-display text-[28px] leading-none font-normal text-ground uppercase no-underline"
+        >
+          <BrandMark size={32} />
+          Médoc <span className="text-accent">Vibes</span>
+        </Link>
+        <p className="order-last m-0 w-full text-center text-mist/80 md:order-none md:w-auto md:flex-1">
           Créé avec amour par{" "}
           <a
             href="https://forgedigitalesolutions.com/"
@@ -96,6 +89,11 @@ export function SiteFooter({
             Forge Digitale Solutions
           </a>
         </p>
+        <div className="flex flex-wrap gap-5">
+          {link("/partenaires", "Partenaires", "partenaires")}
+          {link("/mentions-legales", "Mentions légales", "mentions")}
+          {link("/contact", "Contact", "contact")}
+        </div>
       </div>
     </footer>
   );
