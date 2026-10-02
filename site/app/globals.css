@@ -57,6 +57,18 @@ body {
   animation: mv-drift 12s linear infinite;
 }
 
+/* Marker highlight: lower half of glyphs + slight under-baseline bleed */
+.mv-marker {
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-repeat: no-repeat;
+  background-size: 100% 52%;
+  background-position: left 100%;
+  padding-inline: 0.12em;
+  padding-bottom: 0.1em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

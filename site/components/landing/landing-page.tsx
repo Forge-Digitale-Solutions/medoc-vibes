@@ -85,16 +85,11 @@ export function LandingPage({ tagline }: LandingPageProps) {
           <div className="text-[13px] font-bold tracking-[1.6px] text-ink-muted uppercase">
             01 · Le concept
           </div>
-          <h2 className="m-0 flex flex-col font-display text-[clamp(52px,7.6vw,124px)] leading-[0.92] font-normal uppercase">
+          <h2 className="m-0 flex flex-col gap-[0.14em] font-display text-[clamp(52px,7.6vw,124px)] leading-[1.12] font-normal uppercase">
             <Reveal as="span" delay={0} dx={-20}>
               Le Médoc qui vit,
             </Reveal>
-            <Reveal
-              as="span"
-              delay={0.11}
-              dx={20}
-              className="mt-[0.08em] self-start bg-accent px-[0.12em]"
-            >
+            <Reveal as="span" delay={0.11} dx={20} className="mv-marker self-start">
               près de toi.
             </Reveal>
           </h2>
@@ -114,7 +109,7 @@ export function LandingPage({ tagline }: LandingPageProps) {
           <div className="text-[13px] font-bold tracking-[1.6px] text-sage uppercase">
             02 · Sur la carte
           </div>
-          <h2 className="m-0 flex flex-col font-display text-[clamp(44px,6vw,96px)] leading-[0.95] font-normal uppercase">
+          <h2 className="m-0 flex flex-col gap-[0.12em] font-display text-[clamp(44px,6vw,96px)] leading-[1.1] font-normal uppercase">
             <Reveal as="span" delay={0} dx={-20}>
               Tout ce qui anime
             </Reveal>
