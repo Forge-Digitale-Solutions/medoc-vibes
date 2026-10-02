@@ -68,18 +68,31 @@ export function SiteFooter({
 
   return (
     <footer className="bg-forest px-0 py-10 pb-12 text-mist">
-      <div className="mx-auto flex max-w-[1312px] flex-wrap items-baseline justify-between gap-5 gap-x-10 px-[clamp(20px,5vw,64px)] text-sm leading-normal font-medium">
-        <Link
-          href="/"
-          className="font-display text-[28px] leading-none font-normal text-ground uppercase no-underline"
-        >
-          Médoc <span className="text-accent">Vibes</span>
-        </Link>
-        <div className="flex flex-wrap gap-5">
-          {link("/partenaires", "Partenaires", "partenaires")}
-          {link("/mentions-legales", "Mentions légales", "mentions")}
-          {link("/contact", "Contact", "contact")}
+      <div className="mx-auto flex max-w-[1312px] flex-col gap-6 px-[clamp(20px,5vw,64px)] text-sm leading-normal font-medium">
+        <div className="flex flex-wrap items-baseline justify-between gap-5 gap-x-10">
+          <Link
+            href="/"
+            className="font-display text-[28px] leading-none font-normal text-ground uppercase no-underline"
+          >
+            Médoc <span className="text-accent">Vibes</span>
+          </Link>
+          <div className="flex flex-wrap gap-5">
+            {link("/partenaires", "Partenaires", "partenaires")}
+            {link("/mentions-legales", "Mentions légales", "mentions")}
+            {link("/contact", "Contact", "contact")}
+          </div>
         </div>
+        <p className="m-0 text-mist/80">
+          Créé avec amour par{" "}
+          <a
+            href="https://forgedigitalesolutions.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ground underline decoration-mist/40 underline-offset-2 transition-colors hover:text-accent hover:decoration-accent"
+          >
+            Forge Digitale Solutions
+          </a>
+        </p>
       </div>
     </footer>
   );
