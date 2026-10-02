@@ -16,8 +16,7 @@ export default function MentionsLegalesPage() {
         Mentions légales
       </h1>
       <p className="mt-4 text-sm font-medium text-ink-muted">
-        Site vitrine en préparation. Les mentions d&apos;éditeur incomplètes seront finalisées avant
-        mise en ligne publique.
+        Informations légales du site vitrine Médoc Vibes.
       </p>
 
       <div className="mt-12 flex flex-col gap-10 text-base leading-relaxed font-medium text-ink-soft">
@@ -26,14 +25,14 @@ export default function MentionsLegalesPage() {
             Éditeur
           </h2>
           <p className="m-0">
-            Le site <strong>Médoc Vibes</strong> est édité par{" "}
-            <strong>Forge Digitale Solutions</strong>, projet porté par Anthony Marcelin.
+            Le site <strong>Médoc Vibes</strong> est édité par Anthony Marcelin, entrepreneur
+            individuel, sous le nom commercial <strong>Forge Digitale Solutions</strong>.
           </p>
           <ul className="m-0 list-disc space-y-1 pl-5">
-            <li>Forme juridique : [À compléter]</li>
-            <li>Siège social : [À compléter]</li>
-            <li>SIRET : [À compléter]</li>
-            <li>RCS : [À compléter]</li>
+            <li>Forme juridique : entrepreneur individuel</li>
+            <li>Siège social : 6 rue Saint-Julien, 33112 Saint-Laurent-Médoc</li>
+            <li>SIRET : 100 857 838 00013</li>
+            <li>Immatriculation : RNE n° 100 857 838</li>
             <li>Directeur de la publication : Anthony Marcelin</li>
             <li>
               Contact :{" "}
