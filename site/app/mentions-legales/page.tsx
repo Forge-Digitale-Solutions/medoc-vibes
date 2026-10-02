@@ -3,7 +3,7 @@ import { SiteChrome } from "@/components/site-chrome";
 
 export const metadata: Metadata = {
   title: "Mentions légales : Médoc Vibes",
-  description: "Mentions légales du site Médoc Vibes.",
+  description: "Mentions légales et informations sur les données personnelles du site Médoc Vibes.",
 };
 
 export default function MentionsLegalesPage() {
@@ -16,7 +16,8 @@ export default function MentionsLegalesPage() {
         Mentions légales
       </h1>
       <p className="mt-4 text-sm font-medium text-ink-muted">
-        Site vitrine en préparation. Certaines mentions restent à finaliser avant mise en ligne.
+        Site vitrine en préparation. Les mentions d&apos;éditeur incomplètes seront finalisées avant
+        mise en ligne publique.
       </p>
 
       <div className="mt-12 flex flex-col gap-10 text-base leading-relaxed font-medium text-ink-soft">
@@ -26,20 +27,20 @@ export default function MentionsLegalesPage() {
           </h2>
           <p className="m-0">
             Le site <strong>Médoc Vibes</strong> est édité par{" "}
-            <strong>Forge Digitale Solutions</strong> (projet porté avec Anthony Marcelin).
+            <strong>Forge Digitale Solutions</strong>, projet porté par Anthony Marcelin.
           </p>
           <ul className="m-0 list-disc space-y-1 pl-5">
             <li>Forme juridique : [À compléter]</li>
             <li>Siège social : [À compléter]</li>
             <li>SIRET : [À compléter]</li>
             <li>RCS : [À compléter]</li>
-            <li>Directeur de la publication : Anthony Marcelin (à confirmer)</li>
+            <li>Directeur de la publication : Anthony Marcelin</li>
             <li>
-              Contact : adresse e-mail de contact en cours de création (voir{" "}
+              Contact :{" "}
               <a href="/contact" className="font-semibold text-forest underline">
-                Contact
-              </a>
-              )
+                contact@medocvibes.fr
+              </a>{" "}
+              (adresse en cours de création)
             </li>
           </ul>
         </section>
@@ -49,13 +50,12 @@ export default function MentionsLegalesPage() {
             Hébergement
           </h2>
           <p className="m-0">
-            L&apos;hébergement de production est prévu via une infrastructure type Dokploy sur VPS
-            (conteneurs). Le prestataire et les coordonnées d&apos;hébergement seront indiqués ici
-            dès le déploiement public.
+            Le site et les services associés sont hébergés sur un serveur privé virtuel (VPS) fourni
+            par OVH.
           </p>
           <ul className="m-0 list-disc space-y-1 pl-5">
-            <li>Hébergeur : [À compléter]</li>
-            <li>Adresse : [À compléter]</li>
+            <li>Hébergeur : OVH SAS</li>
+            <li>Adresse : 2 rue Kellermann, 59100 Roubaix, France</li>
           </ul>
         </section>
 
@@ -74,17 +74,26 @@ export default function MentionsLegalesPage() {
             Données personnelles
           </h2>
           <p className="m-0">
-            Ce site vitrine ne collecte pour l&apos;instant aucune donnée via un backend de
-            production. Le formulaire d&apos;alerte e-mail, s&apos;il est activé en local, reste un
-            mock sans envoi serveur. Une politique de confidentialité complète sera publiée avant
-            tout traitement réel (liste d&apos;attente, analytics, etc.).
+            Les données personnelles collectées via ce site (par exemple une adresse e-mail pour la
+            liste d&apos;attente ou un message de contact) le sont uniquement pour vous avertir du
+            lancement ou vous répondre, et pour le fonctionnement du produit Médoc Vibes (site et
+            application).
           </p>
           <p className="m-0">
-            Pour exercer vos droits (accès, rectification, effacement), contactez-nous via la page{" "}
+            Elles ne sont ni revendues, ni cédées à des tiers à des fins commerciales, ni utilisées
+            hors du produit Médoc Vibes.
+          </p>
+          <p className="m-0">
+            Tant qu&apos;aucun formulaire de production n&apos;est branché, aucune donnée n&apos;est
+            envoyée à un serveur : le champ d&apos;alerte e-mail éventuel reste un mock local.
+          </p>
+          <p className="m-0">
+            Pour exercer vos droits (accès, rectification, effacement, opposition), écrivez à{" "}
             <a href="/contact" className="font-semibold text-forest underline">
-              Contact
+              contact@medocvibes.fr
             </a>{" "}
-            dès qu&apos;une adresse opérationnelle sera ouverte.
+            dès que la boîte sera opérationnelle. Vous pouvez aussi saisir la CNIL
+            (www.cnil.fr).
           </p>
         </section>
 
