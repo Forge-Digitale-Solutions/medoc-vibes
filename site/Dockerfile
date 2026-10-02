@@ -1,4 +1,4 @@
-# Médoc Vibes landing — Dokploy Docker build (Node 22 LTS, not Nixpacks)
+# Médoc Vibes landing — image GHCR for Dokploy Provider Docker (atasoif model)
 FROM node:22-alpine AS deps
 WORKDIR /app
 RUN apk add --no-cache libc6-compat
@@ -16,7 +16,8 @@ FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV PORT=3000
+# Match atasoif Dokploy domain port (container listens on 80)
+ENV PORT=80
 ENV HOSTNAME=0.0.0.0
 
 RUN addgroup --system --gid 1001 nodejs \
@@ -27,5 +28,5 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
-EXPOSE 3000
+EXPOSE 80
 CMD ["node", "server.js"]

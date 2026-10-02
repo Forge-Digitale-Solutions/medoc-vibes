@@ -1,0 +1,89 @@
+# Build site/ (Next standalone) and push to GHCR for Dokploy Provider Docker.
+# Image: ghcr.io/forge-digitale-solutions/medoc-vibes-site
+# Pattern calqué sur atasoif-v2 site-ghcr.yml (sans Tailscale tant que secrets absents).
+name: Site GHCR
+
+on:
+  push:
+    branches: [dev, main]
+    paths:
+      - "site/**"
+      - ".github/workflows/site-ghcr.yml"
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: forge-digitale-solutions/medoc-vibes-site
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' }}
+            type=sha,prefix=,format=short
+            type=sha,prefix=sha-,format=long
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./site
+          file: ./site/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # Optional Dokploy webhook (secret). Skips cleanly when unset — no Tailscale yet.
+  notify-dokploy:
+    name: Notify Dokploy (optional)
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: read
+    steps:
+      - name: Trigger Dokploy site deploy webhook
+        env:
+          DOKPLOY_SITE_DEPLOY_WEBHOOK: ${{ secrets.DOKPLOY_SITE_DEPLOY_WEBHOOK }}
+        run: |
+          set -euo pipefail
+          if [ -z "${DOKPLOY_SITE_DEPLOY_WEBHOOK:-}" ]; then
+            echo "No DOKPLOY_SITE_DEPLOY_WEBHOOK — skip (manual Redeploy OK)."
+            exit 0
+          fi
+          http_code="$(curl --silent --show-error --output /tmp/dokploy-webhook.out \
+            --write-out '%{http_code}' --max-time 60 \
+            -X POST \
+            -H 'Accept: application/json' \
+            -H 'Content-Type: application/json' \
+            -d '{}' \
+            "${DOKPLOY_SITE_DEPLOY_WEBHOOK}")"
+          if [ "${http_code}" -lt 200 ] || [ "${http_code}" -ge 300 ]; then
+            echo "::error::Dokploy deploy webhook failed with HTTP ${http_code}"
+            exit 1
+          fi
+          echo "Dokploy deploy webhook accepted (HTTP ${http_code})"
