@@ -38,7 +38,7 @@ export const metadata: Metadata = {
         url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "Médoc Vibes — manger, sortir, bouger",
+        alt: "Médoc Vibes — manger · sortir · bouger",
       },
     ],
   },
