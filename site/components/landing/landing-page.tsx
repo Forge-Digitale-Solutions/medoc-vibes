@@ -16,9 +16,11 @@ const CATS = [
 
 type LandingPageProps = {
   tagline: TaglineKey;
+  /** Dokploy runtime `WEB3FORMS_ACCESS_KEY` — passed into client form for Web3Forms free (client-side). */
+  web3formsAccessKey?: string;
 };
 
-export function LandingPage({ tagline }: LandingPageProps) {
+export function LandingPage({ tagline, web3formsAccessKey = "" }: LandingPageProps) {
   return (
     <main className="overflow-hidden">
       <header className="flex min-h-[min(100svh,960px)] flex-col bg-forest text-ground">
@@ -245,7 +247,7 @@ export function LandingPage({ tagline }: LandingPageProps) {
               <StoreBadge store="google" variant="dark" />
             </Reveal>
             <Reveal delay={0.33}>
-              <WaitlistForm />
+              <WaitlistForm accessKey={web3formsAccessKey} />
             </Reveal>
           </div>
         </div>
