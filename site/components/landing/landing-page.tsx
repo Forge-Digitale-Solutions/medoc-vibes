@@ -224,7 +224,7 @@ export function LandingPage({ tagline }: LandingPageProps) {
             className="flex flex-wrap items-baseline gap-x-3.5 gap-y-2 text-[17px] font-semibold"
           >
             <span className="text-ink-muted">Connexion :</span>
-            <span className="font-extrabold">Google · Apple · Facebook · lien magique par e-mail</span>
+            <span className="font-extrabold">Google · Apple · Facebook · magic link par e-mail</span>
           </Reveal>
         </div>
       </section>

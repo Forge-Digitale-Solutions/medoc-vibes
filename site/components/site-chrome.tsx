@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { BrandMark } from "@/components/brand-mark";
 
 type SiteChromeProps = {
   children: ReactNode;
@@ -14,8 +15,9 @@ export function SiteChrome({ children, active }: SiteChromeProps) {
         <nav className="mx-auto flex w-full max-w-[1312px] items-center gap-6 px-[clamp(20px,5vw,64px)] py-[22px] text-sm font-semibold">
           <Link
             href="/"
-            className="font-display text-2xl leading-none font-normal text-ground uppercase no-underline"
+            className="inline-flex items-center gap-2.5 font-display text-2xl leading-none font-normal text-ground uppercase no-underline"
           >
+            <BrandMark size={28} />
             Médoc <span className="text-accent">Vibes</span>
           </Link>
           <div className="flex flex-1 items-center justify-end gap-5">
@@ -72,8 +74,9 @@ export function SiteFooter({
         <div className="flex flex-wrap items-baseline justify-between gap-5 gap-x-10">
           <Link
             href="/"
-            className="font-display text-[28px] leading-none font-normal text-ground uppercase no-underline"
+            className="inline-flex items-center gap-2.5 font-display text-[28px] leading-none font-normal text-ground uppercase no-underline"
           >
+            <BrandMark size={32} />
             Médoc <span className="text-accent">Vibes</span>
           </Link>
           <div className="flex flex-wrap gap-5">
