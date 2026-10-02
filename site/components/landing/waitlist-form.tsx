@@ -4,18 +4,13 @@ import { useState, type FormEvent } from "react";
 
 type FormStatus = "idle" | "submitting" | "ok" | "error";
 
-type WaitlistFormProps = {
-  /** Injected at request time from Dokploy `WEB3FORMS_ACCESS_KEY` (not a GitHub secret). */
-  accessKey: string;
-};
-
 /**
- * Waitlist bas de landing → POST navigateur vers Web3Forms.
- * Free plan Web3Forms refuse les appels serveur (IP) — d’où le client-side.
+ * Waitlist bas de landing → POST /api/waitlist → Resend
+ * (clé serveur RESEND_API_KEY, jamais exposée au navigateur).
  */
-export function WaitlistForm({ accessKey }: WaitlistFormProps) {
+export function WaitlistForm() {
   const [email, setEmail] = useState("");
-  const [botcheck, setBotcheck] = useState("");
+  const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -29,46 +24,21 @@ export function WaitlistForm({ accessKey }: WaitlistFormProps) {
       return;
     }
 
-    if (!accessKey) {
-      setStatus("error");
-      setErrorMessage(
-        "Configurez WEB3FORMS_ACCESS_KEY (Dokploy → env du service site). En attendant : contact@medocvibes.fr.",
-      );
-      return;
-    }
-
     setStatus("submitting");
     setErrorMessage(null);
 
     try {
-      const formData = new FormData();
-      formData.set("access_key", accessKey);
-      formData.set(
-        "subject",
-        `[Médoc Vibes] Nouvel e-mail landing / waitlist : ${trimmed}`,
-      );
-      formData.set("from_name", "Médoc Vibes landing");
-      formData.set("email", trimmed);
-      formData.set(
-        "message",
-        [
-          "Inscription waitlist (bas de landing medocvibes.fr)",
-          `E-mail : ${trimmed}`,
-          "Notifier : contact@medocvibes.fr",
-        ].join("\n"),
-      );
-      formData.set("botcheck", botcheck);
-
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/waitlist", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: trimmed, website }),
       });
       const payload = (await response.json().catch(() => ({}))) as {
-        success?: boolean;
+        ok?: boolean;
         message?: string;
       };
 
-      if (!response.ok || !payload.success) {
+      if (!response.ok || !payload.ok) {
         setStatus("error");
         setErrorMessage(
           payload.message ||
@@ -79,7 +49,7 @@ export function WaitlistForm({ accessKey }: WaitlistFormProps) {
 
       setStatus("ok");
       setEmail("");
-      setBotcheck("");
+      setWebsite("");
     } catch {
       setStatus("error");
       setErrorMessage(
@@ -98,15 +68,14 @@ export function WaitlistForm({ accessKey }: WaitlistFormProps) {
         className="flex overflow-hidden rounded-lg border-2 border-forest bg-ground"
       >
         <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
-          <label htmlFor="mv-botcheck">Ne pas remplir</label>
+          <label htmlFor="mv-website">Site web</label>
           <input
-            id="mv-botcheck"
-            name="botcheck"
-            type="checkbox"
+            id="mv-website"
+            name="website"
             tabIndex={-1}
             autoComplete="off"
-            checked={botcheck === "true"}
-            onChange={(e) => setBotcheck(e.target.checked ? "true" : "")}
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
           />
         </div>
         <input
