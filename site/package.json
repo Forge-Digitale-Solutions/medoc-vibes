@@ -2,6 +2,9 @@
   "name": "@medoc-vibes/site",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1 --port 43127",
     "build": "next build",
