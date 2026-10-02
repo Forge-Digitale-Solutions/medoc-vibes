@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const accessKey = process.env.WEB3FORMS_ACCESS_KEY?.trim() ?? "";
-
   return (
     <SiteChrome active="contact">
       <p className="mb-4 text-[13px] font-bold tracking-[1.6px] text-ink-muted uppercase">
@@ -32,7 +30,7 @@ export default function ContactPage() {
         .
       </p>
 
-      <ContactForm accessKey={accessKey} />
+      <ContactForm />
 
       <div className="mt-10 border-2 border-forest bg-forest p-[clamp(24px,3vw,36px)] text-ground">
         <p className="m-0 text-[13px] font-bold tracking-[1.4px] text-sage uppercase">

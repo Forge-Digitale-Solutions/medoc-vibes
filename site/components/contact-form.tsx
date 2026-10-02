@@ -6,20 +6,16 @@ const CONTACT_EMAIL = "contact@medocvibes.fr";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
-type ContactFormProps = {
-  accessKey: string;
-};
-
-type Web3Result = {
-  success?: boolean;
+type ApiError = {
+  ok?: boolean;
   message?: string;
 };
 
-export function ContactForm({ accessKey }: ContactFormProps) {
+export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [botcheck, setBotcheck] = useState("");
+  const [company, setCompany] = useState("");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -30,31 +26,15 @@ export function ContactForm({ accessKey }: ContactFormProps) {
     setStatus("submitting");
     setErrorMessage(null);
 
-    if (!accessKey) {
-      setStatus("error");
-      setErrorMessage(
-        "Configurez WEB3FORMS_ACCESS_KEY (Dokploy → env du service site). En attendant : contact@medocvibes.fr.",
-      );
-      return;
-    }
-
     try {
-      const formData = new FormData();
-      formData.set("access_key", accessKey);
-      formData.set("subject", `[Médoc Vibes] Message contact de ${name.trim()}`);
-      formData.set("from_name", "Médoc Vibes /contact");
-      formData.set("name", name.trim());
-      formData.set("email", email.trim());
-      formData.set("message", message.trim());
-      formData.set("botcheck", botcheck);
-
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message, company }),
       });
-      const payload = (await response.json().catch(() => ({}))) as Web3Result;
+      const payload = (await response.json().catch(() => ({}))) as ApiError;
 
-      if (!response.ok || !payload.success) {
+      if (!response.ok || !payload.ok) {
         setStatus("error");
         setErrorMessage(
           payload.message ||
@@ -67,7 +47,7 @@ export function ContactForm({ accessKey }: ContactFormProps) {
       setName("");
       setEmail("");
       setMessage("");
-      setBotcheck("");
+      setCompany("");
     } catch {
       setStatus("error");
       setErrorMessage(
@@ -118,15 +98,14 @@ export function ContactForm({ accessKey }: ContactFormProps) {
       </p>
 
       <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
-        <label htmlFor="contact-botcheck">Ne pas remplir</label>
+        <label htmlFor="contact-company">Société</label>
         <input
-          id="contact-botcheck"
-          name="botcheck"
-          type="checkbox"
+          id="contact-company"
+          name="company"
           tabIndex={-1}
           autoComplete="off"
-          checked={botcheck === "true"}
-          onChange={(e) => setBotcheck(e.target.checked ? "true" : "")}
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
         />
       </div>
 

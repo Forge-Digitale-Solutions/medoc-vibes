@@ -17,32 +17,35 @@ Tagline A/B : alternance automatique selon le jour UTC, override `?t=A` ou `?t=B
 ## Stores
 
 Badges App Store / Google Play : boutons **désactivés** + pastille « Bientôt disponible ».  
-SVG : `public/store/apple.svg`, `public/store/google-play.svg` (copie store Project : `media/landing-claude-design/assets/store/`).
+SVG : `public/store/apple.svg`, `public/store/google-play.svg`.
 
-## Waitlist / contact (Web3Forms)
+## Waitlist / contact (Resend)
 
-Le champ « Être prévenu » (bas de landing) et `/contact` envoient via **Web3Forms** depuis le **navigateur** (plan gratuit : les POST serveur sont refusés).
+Le champ « Être prévenu » et `/contact` passent par des routes API serveur → [Resend](https://resend.com). **La clé n’est jamais exposée au navigateur.**
 
 | Variable | Où | Requis |
 |----------|-----|--------|
-| **`WEB3FORMS_ACCESS_KEY`** | **Dokploy** → service **site** → Environment (runtime) | **Oui** |
+| **`RESEND_API_KEY`** | Dokploy → service **site** → Environment | **Oui** (`re_…`) |
+| `CONTACT_TO_EMAIL` | Idem | Non (défaut `contact@medocvibes.fr`) |
+| `RESEND_FROM_EMAIL` | Idem | Non (défaut `Médoc Vibes <onboarding@resend.dev>`) |
 
-**Pas** de repository secret GitHub pour cette clé. Les GitHub secrets restent réservés au webhook deploy (`DOKPLOY_SITE_DEPLOY_WEBHOOK`, Tailscale).
+**Pas** de repository secret GitHub pour cette clé (seulement le webhook deploy).
 
-La clé est lue au runtime par le Server Component et passée au formulaire client — **pas** de `NEXT_PUBLIC_*` / rebuild pour changer la clé.
+### Setup
 
-### Setup Anthony (une fois)
-
-1. [web3forms.com](https://web3forms.com) → Create Access Key → e-mail **`contact@medocvibes.fr`**
+1. [resend.com/api-keys](https://resend.com/api-keys) → Create API Key  
 2. Dokploy → Médoc Vibes → **site** → Environment :
    ```
-   WEB3FORMS_ACCESS_KEY=<clé>
+   RESEND_API_KEY=re_xxxxxxxxx
    ```
-3. Redeploy le conteneur
-4. Tester le waitlist sur https://medocvibes.fr/
+3. Redeploy le conteneur  
+4. (Plus tard) Vérifier le domaine `medocvibes.fr` dans Resend, puis :
+   ```
+   RESEND_FROM_EMAIL=Médoc Vibes <contact@medocvibes.fr>
+   ```
 
-Sans clé : message clair « Configurez WEB3FORMS_ACCESS_KEY… ».
+Sans clé : API **503** + message « Configurez RESEND_API_KEY… ».
 
 ## Dokploy
 
-Image GHCR + Provider Docker. Dokploy injecte `PORT`. Dev local : port **43127**.
+Image GHCR + Provider Docker. Dev local : port **43127**.
