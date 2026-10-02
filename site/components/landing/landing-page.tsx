@@ -1,3 +1,4 @@
+import { SiteFooter } from "@/components/site-chrome";
 import { HeroPlane } from "./hero-plane";
 import { Reveal } from "./reveal";
 import { StoreBadge } from "./store-badge";
@@ -85,8 +86,8 @@ export function LandingPage({ tagline }: LandingPageProps) {
           <div className="text-[13px] font-bold tracking-[1.6px] text-ink-muted uppercase">
             01 · Le concept
           </div>
-          <h2 className="m-0 flex flex-col gap-[0.14em] font-display text-[clamp(52px,7.6vw,124px)] leading-[1.12] font-normal uppercase">
-            <Reveal as="span" delay={0} dx={-20}>
+          <h2 className="m-0 flex flex-col gap-[0.22em] font-display text-[clamp(52px,7.6vw,124px)] leading-[1.2] font-normal uppercase">
+            <Reveal as="span" delay={0} dx={-20} className="block">
               Le Médoc qui vit,
             </Reveal>
             <Reveal as="span" delay={0.11} dx={20} className="mv-marker self-start">
@@ -251,21 +252,7 @@ export function LandingPage({ tagline }: LandingPageProps) {
         <TideLine color="#0F2A1D" className="mt-[clamp(64px,8vw,110px)]" />
       </section>
 
-      <footer className="bg-forest px-0 py-10 pb-12 text-mist">
-        <div className="mx-auto flex max-w-[1312px] flex-wrap items-baseline justify-between gap-5 gap-x-10 px-[clamp(20px,5vw,64px)] text-sm leading-normal font-medium">
-          <div className="font-display text-[28px] leading-none font-normal text-ground uppercase">
-            Médoc <span className="text-accent">Vibes</span>
-          </div>
-          <div className="flex gap-5">
-            <a href="#mentions" className="text-mist no-underline hover:text-accent">
-              Mentions légales
-            </a>
-            <a href="mailto:hello@medocvibes.fr" className="text-mist no-underline hover:text-accent">
-              Contact
-            </a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
