@@ -148,7 +148,7 @@ export function LandingPage({ tagline }: LandingPageProps) {
       <section className="bg-estuary py-[clamp(80px,10vw,150px)] text-white">
         <div className="mx-auto flex max-w-[1312px] flex-col gap-[clamp(40px,5vw,64px)] px-[clamp(20px,5vw,64px)]">
           <div className="text-[13px] font-bold tracking-[1.6px] uppercase">03 · Des données fiables</div>
-          <h2 className="m-0 flex flex-col font-display text-[clamp(48px,7vw,112px)] leading-[0.92] font-normal uppercase">
+          <h2 className="m-0 flex flex-col gap-[0.12em] font-display text-[clamp(48px,7vw,112px)] leading-[1.1] font-normal uppercase">
             <Reveal as="span" delay={0} dx={-20}>
               Aucun faux avis.
             </Reveal>
@@ -186,7 +186,7 @@ export function LandingPage({ tagline }: LandingPageProps) {
           <div className="text-[13px] font-bold tracking-[1.6px] text-ink-muted uppercase">
             04 · Compte
           </div>
-          <h2 className="m-0 flex flex-col font-display text-[clamp(48px,7vw,112px)] leading-[0.92] font-normal uppercase">
+          <h2 className="m-0 flex flex-col gap-[0.12em] font-display text-[clamp(48px,7vw,112px)] leading-[1.1] font-normal uppercase">
             <Reveal as="span" delay={0} dx={-20}>
               Compte facultatif.
             </Reveal>
@@ -230,7 +230,7 @@ export function LandingPage({ tagline }: LandingPageProps) {
 
       <section className="bg-accent pt-[clamp(80px,10vw,150px)] text-forest">
         <div className="mx-auto flex max-w-[1312px] flex-col gap-[clamp(32px,4vw,52px)] px-[clamp(20px,5vw,64px)]">
-          <h2 className="m-0 flex flex-col font-display text-[clamp(64px,11vw,184px)] leading-[0.88] font-normal uppercase">
+          <h2 className="m-0 flex flex-col gap-[0.12em] font-display text-[clamp(64px,11vw,184px)] leading-[1.08] font-normal uppercase">
             <Reveal as="span" delay={0} dx={-24}>
               Rendez-vous
             </Reveal>
