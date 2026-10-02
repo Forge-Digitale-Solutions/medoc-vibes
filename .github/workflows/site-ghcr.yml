@@ -1,6 +1,6 @@
 # Build site/ (Next standalone) and push to GHCR for Dokploy Provider Docker.
 # Image: ghcr.io/forge-digitale-solutions/medoc-vibes-site
-# Pattern calqué sur atasoif-v2 site-ghcr.yml (sans Tailscale tant que secrets absents).
+# After push: POST Dokploy deploy webhook (public HTTP — secret DOKPLOY_SITE_DEPLOY_WEBHOOK).
 name: Site GHCR
 
 on:
@@ -57,12 +57,13 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # Optional Dokploy webhook (secret). Skips cleanly when unset — no Tailscale yet.
+  # Webhook must be the public Dokploy URL (http://178.x…:3000/…), not Tailscale 100.x —
+  # GitHub-hosted runners cannot reach the tailnet without TS_OAUTH_* (unused here).
   notify-dokploy:
-    name: Notify Dokploy (optional)
+    name: Notify Dokploy
     needs: build-and-push
     runs-on: ubuntu-latest
-    continue-on-error: true
+    continue-on-error: false
     permissions:
       contents: read
     steps:
@@ -72,9 +73,11 @@ jobs:
         run: |
           set -euo pipefail
           if [ -z "${DOKPLOY_SITE_DEPLOY_WEBHOOK:-}" ]; then
-            echo "No DOKPLOY_SITE_DEPLOY_WEBHOOK — skip (manual Redeploy OK)."
-            exit 0
+            echo "::error::Missing secret DOKPLOY_SITE_DEPLOY_WEBHOOK (full public Dokploy deploy URL)"
+            exit 1
           fi
+
+          # Do not echo the URL or response body (may contain tokens).
           http_code="$(curl --silent --show-error --output /tmp/dokploy-webhook.out \
             --write-out '%{http_code}' --max-time 60 \
             -X POST \
