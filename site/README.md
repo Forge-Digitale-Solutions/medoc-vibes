@@ -21,29 +21,28 @@ SVG : `public/store/apple.svg`, `public/store/google-play.svg` (copie store Proj
 
 ## Waitlist / contact (Web3Forms)
 
-Le champ « Être prévenu » (bas de landing) et le formulaire `/contact` passent par des routes API serveur qui POST vers [Web3Forms](https://web3forms.com) — **la clé n’est pas publique**.
+Le champ « Être prévenu » (bas de landing) et `/contact` envoient via **Web3Forms** depuis le **navigateur** (plan gratuit : les POST serveur sont refusés).
 
 | Variable | Où | Requis |
 |----------|-----|--------|
-| **`WEB3FORMS_ACCESS_KEY`** | Dokploy → service **site** → Environment (runtime) | **Oui** |
+| **`WEB3FORMS_ACCESS_KEY`** | **Dokploy** → service **site** → Environment (runtime) | **Oui** |
+
+**Pas** de repository secret GitHub pour cette clé. Les GitHub secrets restent réservés au webhook deploy (`DOKPLOY_SITE_DEPLOY_WEBHOOK`, Tailscale).
+
+La clé est lue au runtime par le Server Component et passée au formulaire client — **pas** de `NEXT_PUBLIC_*` / rebuild pour changer la clé.
 
 ### Setup Anthony (une fois)
 
-1. Aller sur [web3forms.com](https://web3forms.com) → Create Access Key  
-2. Associer l’e-mail **`contact@medocvibes.fr`**  
-3. Copier la access key  
-4. Dokploy → projet Médoc Vibes → service **site** → **Environment** → ajouter :
+1. [web3forms.com](https://web3forms.com) → Create Access Key → e-mail **`contact@medocvibes.fr`**
+2. Dokploy → Médoc Vibes → **site** → Environment :
    ```
-   WEB3FORMS_ACCESS_KEY=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+   WEB3FORMS_ACCESS_KEY=<clé>
    ```
-5. **Redeploy** le service (pas besoin de rebuild GHCR : env runtime lue par Node)  
-6. Tester le champ waitlist sur https://medocvibes.fr/ → e-mail reçu sur `contact@medocvibes.fr`
+3. Redeploy le conteneur
+4. Tester le waitlist sur https://medocvibes.fr/
 
-Sans clé : l’UI reste OK, l’API répond **503** avec le message « Configurez WEB3FORMS_ACCESS_KEY… ».
-
-> Pas de `NEXT_PUBLIC_*` pour cette clé (volontairement serveur-only).  
-> Pas de secret GitHub Actions requis pour l’envoi.
+Sans clé : message clair « Configurez WEB3FORMS_ACCESS_KEY… ».
 
 ## Dokploy
 
-Image GHCR + Provider Docker (voir doc Project). Dokploy injecte `PORT` : ne pas hardcoder le port public. Le port **43127** est uniquement pour le dev local.
+Image GHCR + Provider Docker. Dokploy injecte `PORT`. Dev local : port **43127**.
