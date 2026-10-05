@@ -7,6 +7,30 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
+  'feed.around': {
+    methods: ["GET","HEAD"]
+    pattern: '/v1/feed/around'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/feed_controller').default['around']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/feed_controller').default['around']>>>
+    }
+  }
+  'feed.around_count': {
+    methods: ["GET","HEAD"]
+    pattern: '/v1/feed/around/count'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/feed_controller').default['aroundCount']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/feed_controller').default['aroundCount']>>>
+    }
+  }
   'auth.new_account.store': {
     methods: ["POST"]
     pattern: '/api/v1/auth/signup'

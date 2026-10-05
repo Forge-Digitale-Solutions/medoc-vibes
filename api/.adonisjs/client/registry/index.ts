@@ -6,6 +6,18 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
+  'feed.around': {
+    methods: ["GET","HEAD"],
+    pattern: '/v1/feed/around',
+    tokens: [{"old":"/v1/feed/around","type":0,"val":"v1","end":""},{"old":"/v1/feed/around","type":0,"val":"feed","end":""},{"old":"/v1/feed/around","type":0,"val":"around","end":""}],
+    types: placeholder as Registry['feed.around']['types'],
+  },
+  'feed.around_count': {
+    methods: ["GET","HEAD"],
+    pattern: '/v1/feed/around/count',
+    tokens: [{"old":"/v1/feed/around/count","type":0,"val":"v1","end":""},{"old":"/v1/feed/around/count","type":0,"val":"feed","end":""},{"old":"/v1/feed/around/count","type":0,"val":"around","end":""},{"old":"/v1/feed/around/count","type":0,"val":"count","end":""}],
+    types: placeholder as Registry['feed.around_count']['types'],
+  },
   'auth.new_account.store': {
     methods: ["POST"],
     pattern: '/api/v1/auth/signup',
