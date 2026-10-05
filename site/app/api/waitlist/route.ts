@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { isValidEmail, sendNotifyEmail } from "@/lib/mail";
+import {
+  isValidEmail,
+  sendNotifyEmail,
+  sendWaitlistConfirmation,
+} from "@/lib/mail";
 
 export const runtime = "nodejs";
 
@@ -7,7 +11,7 @@ const MAX_EMAIL = 254;
 
 type WaitlistBody = {
   email?: unknown;
-  /** Honeypot — must stay empty */
+  /** Honeypot - must stay empty */
   website?: unknown;
 };
 
@@ -59,6 +63,15 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { ok: false, error: result.error, message: result.message },
       { status },
+    );
+  }
+
+  const confirmation = await sendWaitlistConfirmation({ to: email });
+  if (!confirmation.ok) {
+    console.error(
+      "[waitlist] confirmation email failed (notify ok):",
+      confirmation.error,
+      confirmation.message,
     );
   }
 
