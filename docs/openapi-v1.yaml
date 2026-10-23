@@ -1,0 +1,443 @@
+openapi: 3.0.3
+info:
+  title: Médoc Vibes Read API
+  version: 1.0.0
+  description: |
+    Lecture seule — 4 écrans handoff (feed, place, event, IRVE).
+    Feed = partenaires d'abord puis near→far + cursor pagination ; pas de cut-off produit 15 km.
+    Pas de ratings. CTA conditionnels. Voir api-contracts.md.
+servers:
+  - url: /v1
+    description: API Adonis (base path)
+paths:
+  /feed/around:
+    get:
+      operationId: getFeedAround
+      summary: Feed autour de moi (02a / 02b)
+      parameters:
+        - $ref: '#/components/parameters/Lat'
+        - $ref: '#/components/parameters/Lon'
+        - $ref: '#/components/parameters/Commune'
+        - $ref: '#/components/parameters/RadiusKmFeed'
+        - $ref: '#/components/parameters/Chip'
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50, minimum: 1, maximum: 100 }
+        - name: cursor
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Items ou empty state
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FeedAroundResponse' }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /feed/around/count:
+    get:
+      operationId: getFeedAroundCount
+      summary: Compteur N plans (02a)
+      parameters:
+        - $ref: '#/components/parameters/Lat'
+        - $ref: '#/components/parameters/Lon'
+        - $ref: '#/components/parameters/Commune'
+        - $ref: '#/components/parameters/RadiusKmFeed'
+        - $ref: '#/components/parameters/Chip'
+      responses:
+        '200':
+          description: Count
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FeedCountResponse' }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /places/{id}:
+    get:
+      operationId: getPlace
+      summary: Fiche lieu (03)
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+        - name: include_irve
+          in: query
+          schema: { type: boolean, default: true }
+      responses:
+        '200':
+          description: Place detail
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlaceDetailResponse' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /places/{id}/events:
+    get:
+      operationId: getPlaceEvents
+      summary: Prochains events d'un lieu (04a)
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+        - name: from
+          in: query
+          schema: { type: string, default: now }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20, minimum: 1, maximum: 50 }
+      responses:
+        '200':
+          description: Events list (peut être vide)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlaceEventsResponse' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /events/{id}:
+    get:
+      operationId: getEvent
+      summary: Fiche event (04a / 04b)
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Event detail
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EventDetailResponse' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /irve/nearby:
+    get:
+      operationId: getIrveNearby
+      summary: Bornes IRVE proches (statique PAN)
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema: { type: number, format: double }
+        - name: lon
+          in: query
+          required: true
+          schema: { type: number, format: double }
+        - $ref: '#/components/parameters/RadiusKmIrve'
+      responses:
+        '200':
+          description: Stations snapshot
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IrveNearbyResponse' }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+components:
+  parameters:
+    IdPath:
+      name: id
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+    Lat:
+      name: lat
+      in: query
+      description: Requis sauf si commune fourni
+      schema: { type: number, format: double }
+    Lon:
+      name: lon
+      in: query
+      description: Requis sauf si commune fourni
+      schema: { type: number, format: double }
+    Commune:
+      name: commune
+      in: query
+      description: Commune allowlist 56 (sheet CP/ville sur feed). lat/lon prioritaire si les deux ; refus géoloc = point défaut Médoc côté client.
+      schema: { type: string }
+    RadiusKmFeed:
+      name: radius_km
+      in: query
+      description: >
+        Optionnel — préfiltre technique/perf seulement. Omis = pas de bride distance produit
+        (allowlist + ORDER BY distance + cursor). Ne pas utiliser 15 comme cut-off produit.
+      schema: { type: number, exclusiveMinimum: 0, nullable: true }
+    RadiusKmIrve:
+      name: radius_km
+      in: query
+      schema: { type: number, default: 3, exclusiveMinimum: 0 }
+    Chip:
+      name: chip
+      in: query
+      schema: { $ref: '#/components/schemas/ChipSlug' }
+
+  responses:
+    BadRequest:
+      description: Query invalide
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorBody' }
+    NotFound:
+      description: Ressource inconnue ou inactive
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorBody' }
+
+  schemas:
+    ChipSlug:
+      type: string
+      enum: [tout, restos-bars, sorties, culture, vide-greniers, marches-fetes, surf-cote]
+      default: tout
+
+    Badge:
+      type: string
+      enum: [ot, agenda, partenaire, autre]
+      description: UI labels OT · Agenda · Partenaire
+
+    EntityType:
+      type: string
+      enum: [place, event]
+
+    PlaceKind:
+      type: string
+      enum: [poi, venue, heritage, beach, sport]
+
+    MediaRef:
+      type: object
+      nullable: true
+      properties:
+        url: { type: string, format: uri }
+        license: { type: string, nullable: true }
+        attribution: { type: string, nullable: true }
+
+    ErrorBody:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+              enum: [bad_request, not_found]
+            message: { type: string }
+
+    EmptyState:
+      type: object
+      nullable: true
+      properties:
+        chip: { $ref: '#/components/schemas/ChipSlug' }
+        message: { type: string }
+        cta:
+          type: string
+          enum: [suggest_add, change_chip]
+
+    FeedItem:
+      type: object
+      required:
+        - id
+        - entity_type
+        - chip_slug
+        - subtitle
+        - lat
+        - lon
+        - badge
+        - partner_boost
+      properties:
+        id: { type: string, format: uuid }
+        entity_type: { $ref: '#/components/schemas/EntityType' }
+        name: { type: string, nullable: true }
+        title: { type: string, nullable: true }
+        chip_slug: { type: string }
+        subtitle: { type: string }
+        lat: { type: number }
+        lon: { type: number }
+        media: { $ref: '#/components/schemas/MediaRef' }
+        badge: { $ref: '#/components/schemas/Badge' }
+        opening_or_when: { type: string, nullable: true }
+        booking_or_ticket_url: { type: string, format: uri, nullable: true }
+        partner_boost: { type: boolean }
+      description: Pas de rating ni distance_km (distance client)
+
+    FeedAroundResponse:
+      type: object
+      required: [data_as_of, query, items]
+      description: >
+        Ordre items = partenaires boost puis near→far. Pagination via next_cursor.
+        Pas de cut-off produit 15 km.
+      properties:
+        data_as_of: { type: string, format: date-time }
+        query:
+          type: object
+          properties:
+            lat: { type: number, nullable: true }
+            lon: { type: number, nullable: true }
+            radius_km: { type: number, nullable: true, description: "null = pas de bride ; sinon préfiltre technique optionnel" }
+            chip: { $ref: '#/components/schemas/ChipSlug' }
+            commune: { type: string, nullable: true }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/FeedItem' }
+        next_cursor: { type: string, nullable: true }
+        empty: { $ref: '#/components/schemas/EmptyState' }
+
+    FeedCountResponse:
+      type: object
+      required: [data_as_of, count, chip]
+      properties:
+        data_as_of: { type: string, format: date-time }
+        count: { type: integer, minimum: 0 }
+        radius_km: { type: number, nullable: true, description: "Écho du préfiltre technique si fourni ; null sinon" }
+        chip: { $ref: '#/components/schemas/ChipSlug' }
+
+    IrveStation:
+      type: object
+      required: [id, lat, lon]
+      properties:
+        id: { type: string, format: uuid }
+        lat: { type: number }
+        lon: { type: number }
+        power_kw: { type: number, nullable: true }
+        operator_name: { type: string, nullable: true }
+        address: { type: string, nullable: true }
+      description: Snapshot PAN — pas available_now
+
+    NearbyIrve:
+      type: object
+      required: [count, radius_km, stations]
+      properties:
+        count: { type: integer, minimum: 0 }
+        radius_km: { type: number }
+        stations:
+          type: array
+          items: { $ref: '#/components/schemas/IrveStation' }
+
+    PlaceCtas:
+      type: object
+      required: [go, book, website]
+      properties:
+        go: { type: boolean }
+        book: { type: boolean, description: true si booking_url }
+        website: { type: boolean, description: true si website_url }
+
+    EventCtas:
+      type: object
+      required: [go, tickets, website]
+      properties:
+        go: { type: boolean }
+        tickets: { type: boolean, description: true si ticket_url ou registration_url }
+        website: { type: boolean }
+
+    Place:
+      type: object
+      required: [id, kind, name, chip_slug, lat, lon, commune, badge, amenities]
+      properties:
+        id: { type: string, format: uuid }
+        kind: { $ref: '#/components/schemas/PlaceKind' }
+        name: { type: string }
+        chip_slug: { type: string }
+        short_description: { type: string, nullable: true }
+        description: { type: string, nullable: true }
+        lat: { type: number }
+        lon: { type: number }
+        commune: { type: string }
+        insee_code: { type: string, nullable: true }
+        opening_hours: { type: string, nullable: true }
+        amenities:
+          type: array
+          items: { type: string }
+        media:
+          type: array
+          items: { $ref: '#/components/schemas/MediaRef' }
+        booking_url: { type: string, format: uri, nullable: true }
+        website_url: { type: string, format: uri, nullable: true }
+        phone: { type: string, nullable: true }
+        badge: { $ref: '#/components/schemas/Badge' }
+        attribution: { type: string, nullable: true }
+        license: { type: string, nullable: true }
+        partner_id: { type: string, format: uuid, nullable: true }
+
+    PlaceDetailResponse:
+      type: object
+      required: [data_as_of, place, ctas]
+      properties:
+        data_as_of: { type: string, format: date-time }
+        place: { $ref: '#/components/schemas/Place' }
+        nearby_irve: { $ref: '#/components/schemas/NearbyIrve' }
+        ctas: { $ref: '#/components/schemas/PlaceCtas' }
+
+    Event:
+      type: object
+      required: [id, title, chip_slug, starts_at, badge]
+      properties:
+        id: { type: string, format: uuid }
+        title: { type: string }
+        description: { type: string, nullable: true }
+        genre_or_keywords: { type: string, nullable: true }
+        chip_slug: { type: string }
+        starts_at: { type: string, format: date-time }
+        ends_at: { type: string, format: date-time, nullable: true }
+        price_label: { type: string, nullable: true }
+        lat: { type: number, nullable: true }
+        lon: { type: number, nullable: true }
+        commune: { type: string, nullable: true }
+        place_id: { type: string, format: uuid, nullable: true }
+        media: { $ref: '#/components/schemas/MediaRef' }
+        ticket_url: { type: string, format: uri, nullable: true }
+        registration_url: { type: string, format: uri, nullable: true }
+        website_url: { type: string, format: uri, nullable: true }
+        badge: { $ref: '#/components/schemas/Badge' }
+        attribution: { type: string, nullable: true }
+        license: { type: string, nullable: true }
+        partner_id: { type: string, format: uuid, nullable: true }
+
+    PlaceSummary:
+      type: object
+      nullable: true
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        commune: { type: string, nullable: true }
+
+    EventDetailResponse:
+      type: object
+      required: [data_as_of, event, ctas]
+      properties:
+        data_as_of: { type: string, format: date-time }
+        event: { $ref: '#/components/schemas/Event' }
+        place_summary: { $ref: '#/components/schemas/PlaceSummary' }
+        ctas: { $ref: '#/components/schemas/EventCtas' }
+
+    PlaceEventItem:
+      type: object
+      required: [id, title, starts_at, badge]
+      properties:
+        id: { type: string, format: uuid }
+        title: { type: string }
+        starts_at: { type: string, format: date-time }
+        ends_at: { type: string, format: date-time, nullable: true }
+        genre_or_keywords: { type: string, nullable: true }
+        price_label: { type: string, nullable: true }
+        ticket_url: { type: string, format: uri, nullable: true }
+        badge: { $ref: '#/components/schemas/Badge' }
+
+    PlaceEventsResponse:
+      type: object
+      required: [data_as_of, place_id, items]
+      properties:
+        data_as_of: { type: string, format: date-time }
+        place_id: { type: string, format: uuid }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/PlaceEventItem' }
+        empty: { $ref: '#/components/schemas/EmptyState' }
+
+    IrveNearbyResponse:
+      type: object
+      required: [data_as_of, count, radius_km, stations]
+      properties:
+        data_as_of: { type: string, format: date-time }
+        count: { type: integer, minimum: 0 }
+        radius_km: { type: number }
+        stations:
+          type: array
+          items: { $ref: '#/components/schemas/IrveStation' }
