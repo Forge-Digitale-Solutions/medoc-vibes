@@ -2,9 +2,6 @@
 |--------------------------------------------------------------------------
 | Routes file
 |--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
 */
 
 import { middleware } from '#start/kernel'
@@ -12,9 +9,22 @@ import router from '@adonisjs/core/services/router'
 import { controllers } from '#generated/controllers'
 
 router.get('/', () => {
-  return { ok: true, service: 'medoc-vibes-api', version: '0.0.1' }
+  return { ok: true, service: 'medoc-vibes-api', version: '0.1.0' }
 })
 
+/**
+ * Public read API (OpenAPI / contracts) — base path /v1
+ */
+router
+  .group(() => {
+    router.get('feed/around', [controllers.Feed, 'around'])
+    router.get('feed/around/count', [controllers.Feed, 'aroundCount'])
+  })
+  .prefix('/v1')
+
+/**
+ * Scaffold auth (starter kit) — kept under /api/v1; not part of OpenAPI read contracts.
+ */
 router
   .group(() => {
     router

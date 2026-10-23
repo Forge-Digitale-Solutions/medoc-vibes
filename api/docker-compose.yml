@@ -1,0 +1,25 @@
+# Local Postgres + PostGIS for Médoc Vibes API
+# Usage: docker compose up -d
+# Port 55432 avoids clashing with a host Postgres on 5432.
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: medoc-vibes-postgis
+    environment:
+      POSTGRES_USER: medoc
+      POSTGRES_PASSWORD: medoc
+      POSTGRES_DB: medoc_vibes
+    ports:
+      - '55432:5432'
+    volumes:
+      - medoc_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U medoc -d medoc_vibes']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+volumes:
+  medoc_pg_data:

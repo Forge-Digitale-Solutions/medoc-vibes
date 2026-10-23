@@ -2,6 +2,10 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
+  feed: {
+    around: typeof routes['feed.around']
+    aroundCount: typeof routes['feed.around_count']
+  }
   auth: {
     newAccount: {
       store: typeof routes['auth.new_account.store']

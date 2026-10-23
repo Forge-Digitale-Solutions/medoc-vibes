@@ -17,7 +17,7 @@ Monorepo for the **Médoc Vibes** tourism app (food, nightlife, local leisure in
 
 - **Node.js ≥ 24** (AdonisJS 7)
 - npm 11+
-- **External Postgres** (infra / Dokploy) — **not required** to boot locally (SQLite by default)
+- **Docker Compose** (local Postgres **+ PostGIS** for the API)
 
 ## Local development
 
@@ -25,10 +25,12 @@ Monorepo for the **Médoc Vibes** tourism app (food, nightlife, local leisure in
 # From repo root (npm workspaces)
 npm install
 
-# API — http://localhost:3333
+# API — PostGIS + migrate/seed + http://localhost:3333
 cd api
+docker compose up -d
 cp .env.example .env
 node ace generate:key
+npm run db:setup
 npm run dev
 
 # Ops KPI — http://localhost:4311
@@ -46,13 +48,14 @@ npm run dev:ops
 npm run dev:site
 ```
 
-Local ports above are **dev convenience only**.
+Local ports above are **dev convenience only**. See [`api/README.md`](api/README.md) for curl smoke tests (`GET /v1/feed/around`).
 
 ### Database
 
-- **Local:** SQLite (`api/tmp/db.sqlite3`) — no local Postgres needed.
-- **Prod / Dokploy:** set `DATABASE_URL` (or `DB_CONNECTION=pg` + `DB_HOST` / `DB_USER` / …) to the shared infra Postgres.
+- **Local API:** Docker Compose PostGIS on port **55432** (`api/docker-compose.yml`). Default connection = `pg` (not SQLite).
+- **Prod / Dokploy:** set `DATABASE_URL` (or `DB_*`) to shared infra Postgres **with PostGIS**.
 - Do not commit secrets — `.env.example` only.
+- Communes allowlist CSV: `data/medoc-communes-codes-postaux.csv` (+ INSEE map under `api/database/data/`).
 
 ## Deploy (Dokploy)
 

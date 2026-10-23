@@ -8,18 +8,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class AuthAccessTokenSchema extends BaseModel {
-  static $columns = [
-    'abilities',
-    'createdAt',
-    'expiresAt',
-    'hash',
-    'id',
-    'lastUsedAt',
-    'name',
-    'tokenableId',
-    'type',
-    'updatedAt',
-  ] as const
+  static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
   $columns = AuthAccessTokenSchema.$columns
   @column()
   declare abilities: string
@@ -39,6 +28,229 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare tokenableId: number
   @column()
   declare type: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class CommuneSchema extends BaseModel {
+  static $columns = ['createdAt', 'geom', 'inseeCode', 'lat', 'lon', 'name', 'postalCode', 'updatedAt', 'zone'] as const
+  $columns = CommuneSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare geom: any | null
+  @column({ isPrimary: true })
+  declare inseeCode: string
+  @column()
+  declare lat: number | null
+  @column()
+  declare lon: number | null
+  @column()
+  declare name: string
+  @column()
+  declare postalCode: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare zone: string
+}
+
+export class EventSchema extends BaseModel {
+  static $columns = ['attribution', 'chipSlug', 'commune', 'createdAt', 'dedupKey', 'description', 'endsAt', 'externalId', 'genreOrKeywords', 'geom', 'id', 'inseeCode', 'isActive', 'lat', 'license', 'lon', 'media', 'partnerId', 'placeId', 'priceLabel', 'registrationUrl', 'sourceId', 'sourceUpdatedAt', 'startsAt', 'syncedAt', 'ticketUrl', 'title', 'updatedAt', 'websiteUrl'] as const
+  $columns = EventSchema.$columns
+  @column()
+  declare attribution: string | null
+  @column()
+  declare chipSlug: string
+  @column()
+  declare commune: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare dedupKey: string | null
+  @column()
+  declare description: string | null
+  @column.dateTime()
+  declare endsAt: DateTime | null
+  @column()
+  declare externalId: string
+  @column()
+  declare genreOrKeywords: string | null
+  @column()
+  declare geom: any | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare inseeCode: string | null
+  @column()
+  declare isActive: boolean
+  @column()
+  declare lat: number
+  @column()
+  declare license: string | null
+  @column()
+  declare lon: number
+  @column()
+  declare media: any
+  @column()
+  declare partnerId: string | null
+  @column()
+  declare placeId: string | null
+  @column()
+  declare priceLabel: string | null
+  @column()
+  declare registrationUrl: string | null
+  @column()
+  declare sourceId: string
+  @column.dateTime()
+  declare sourceUpdatedAt: DateTime | null
+  @column.dateTime()
+  declare startsAt: DateTime | null
+  @column.dateTime()
+  declare syncedAt: DateTime | null
+  @column()
+  declare ticketUrl: string | null
+  @column()
+  declare title: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare websiteUrl: string | null
+}
+
+export class PartnerSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'name', 'slug', 'status', 'updatedAt'] as const
+  $columns = PartnerSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare name: string
+  @column()
+  declare slug: string
+  @column()
+  declare status: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class PlaceSchema extends BaseModel {
+  static $columns = ['amenities', 'attribution', 'bookingUrl', 'chipSlug', 'commune', 'createdAt', 'dedupKey', 'description', 'externalId', 'geom', 'id', 'inseeCode', 'isActive', 'kind', 'lat', 'license', 'lon', 'media', 'name', 'openingHours', 'partnerId', 'phone', 'shortDescription', 'sourceId', 'sourceUpdatedAt', 'syncedAt', 'updatedAt', 'websiteUrl'] as const
+  $columns = PlaceSchema.$columns
+  @column()
+  declare amenities: any
+  @column()
+  declare attribution: string | null
+  @column()
+  declare bookingUrl: string | null
+  @column()
+  declare chipSlug: string
+  @column()
+  declare commune: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare dedupKey: string | null
+  @column()
+  declare description: string | null
+  @column()
+  declare externalId: string
+  @column()
+  declare geom: any | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare inseeCode: string | null
+  @column()
+  declare isActive: boolean
+  @column()
+  declare kind: string | null
+  @column()
+  declare lat: number
+  @column()
+  declare license: string | null
+  @column()
+  declare lon: number
+  @column()
+  declare media: any
+  @column()
+  declare name: string
+  @column()
+  declare openingHours: any | null
+  @column()
+  declare partnerId: string | null
+  @column()
+  declare phone: string | null
+  @column()
+  declare shortDescription: string | null
+  @column()
+  declare sourceId: string
+  @column.dateTime()
+  declare sourceUpdatedAt: DateTime | null
+  @column.dateTime()
+  declare syncedAt: DateTime | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare websiteUrl: string | null
+}
+
+export class SourceSchema extends BaseModel {
+  static $columns = ['attributionTemplate', 'badge', 'createdAt', 'id', 'label', 'license', 'updatedAt'] as const
+  $columns = SourceSchema.$columns
+  @column()
+  declare attributionTemplate: string | null
+  @column()
+  declare badge: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare label: string
+  @column()
+  declare license: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class SpatialRefSySchema extends BaseModel {
+  static $columns = ['authName', 'authSrid', 'proj4Text', 'srid', 'srtext'] as const
+  $columns = SpatialRefSySchema.$columns
+  @column()
+  declare authName: string | null
+  @column()
+  declare authSrid: number | null
+  @column()
+  declare proj4Text: string | null
+  @column({ isPrimary: true })
+  declare srid: number
+  @column()
+  declare srtext: string | null
+}
+
+export class SyncRunSchema extends BaseModel {
+  static $columns = ['createdAt', 'errorSummary', 'finishedAt', 'id', 'params', 'sourceId', 'startedAt', 'stats', 'status', 'updatedAt'] as const
+  $columns = SyncRunSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare errorSummary: string | null
+  @column.dateTime()
+  declare finishedAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare params: any | null
+  @column()
+  declare sourceId: string
+  @column.dateTime()
+  declare startedAt: DateTime
+  @column()
+  declare stats: any | null
+  @column()
+  declare status: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }

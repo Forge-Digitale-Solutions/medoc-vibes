@@ -2,11 +2,12 @@
 # Image: ghcr.io/forge-digitale-solutions/medoc-vibes-site
 # After push: POST Dokploy deploy webhook (secret DOKPLOY_SITE_DEPLOY_WEBHOOK).
 # Public HTTPS Dokploy URL — no Tailscale join required on GitHub-hosted runners.
+# Prod only: push to main (dev must not redeploy).
 name: Site GHCR
 
 on:
   push:
-    branches: [dev, main]
+    branches: [main]
     paths:
       - "site/**"
       - ".github/workflows/site-ghcr.yml"
@@ -44,7 +45,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' }}
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
             type=sha,prefix=,format=short
             type=sha,prefix=sha-,format=long
 

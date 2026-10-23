@@ -28,8 +28,14 @@ Le champ « Être prévenu » et `/contact` passent par des routes API serveur �
 | **`RESEND_API_KEY`** | Dokploy → service **site** → Environment | **Oui** (`re_…`) |
 | `CONTACT_TO_EMAIL` | Idem | Non (défaut `contact@medocvibes.fr`) |
 | `RESEND_FROM_EMAIL` | Idem | Non (défaut `Médoc Vibes <onboarding@resend.dev>`) |
+| `RESEND_REPLY_TO` | Idem | Non (défaut = `CONTACT_TO_EMAIL` / `contact@medocvibes.fr`) |
 
 **Pas** de repository secret GitHub pour cette clé (seulement le webhook deploy).
+
+### Flux waitlist
+
+1. **Notif interne** → To `CONTACT_TO_EMAIL`, From `RESEND_FROM_EMAIL`, Reply-To = e-mail du visiteur (réponse directe OK).
+2. **Confirmation visiteur** → To = e-mail du visiteur, From `RESEND_FROM_EMAIL`, Reply-To = `RESEND_REPLY_TO` (sinon contact@). Si la confirmation échoue, l’API reste **200** tant que la notif interne a réussi (log serveur seulement).
 
 ### Setup
 
@@ -37,12 +43,10 @@ Le champ « Être prévenu » et `/contact` passent par des routes API serveur �
 2. Dokploy → Médoc Vibes → **site** → Environment :
    ```
    RESEND_API_KEY=re_xxxxxxxxx
+   RESEND_FROM_EMAIL=Médoc Vibes <noreply@medocvibes.fr>
+   RESEND_REPLY_TO=contact@medocvibes.fr
    ```
 3. Redeploy le conteneur  
-4. (Plus tard) Vérifier le domaine `medocvibes.fr` dans Resend, puis :
-   ```
-   RESEND_FROM_EMAIL=Médoc Vibes <contact@medocvibes.fr>
-   ```
 
 Sans clé : API **503** + message « Configurez RESEND_API_KEY… ».
 
