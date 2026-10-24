@@ -5,7 +5,7 @@
 **YAML machine-readable :** [openapi-v1.yaml](openapi-v1.yaml)  
 **Sources :** [data-model-sync.md](data-model-sync.md) §5 · [maquette-v2-data.md](maquette-v2-data.md) · [maquettes-vs-data.md](maquettes-vs-data.md) · [perimeter-medoc.md](perimeter-medoc.md) · [parcours](app-journey-brainstorm.md)
 
-**Hors scope :** auth, favoris cloud, CMS partenaire CRUD, ratings, live IRVE, Dokploy.
+**Hors scope :** CMS partenaire CRUD, ratings, live IRVE, Dokploy. Auth + favoris cloud : [auth-contracts.md](auth-contracts.md).
 
 ---
 
@@ -412,7 +412,7 @@ Si aucun event à venir :
 
 ## Non-MVP (ne pas spécifier / builder)
 
-- Auth Google/Apple, favoris sync, search full-text avancée  
+- Auth Apple/Google/magic link e-mail, favoris sync, search full-text avancée  
 - CRUD CMS partenaire, tracking attribution clics  
 - Ratings / reviews  
 - IRVE live occupation  

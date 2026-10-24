@@ -10,7 +10,7 @@
 
 ```
 Welcome
-  ├─ Auth (Google / Apple / Facebook / magic link) → sans pubs
+  ├─ Auth (Google / Apple / magic link e-mail) → sans pubs
   └─ Explorer sans compte → pubs réseau
         ↓
    Permission géoloc OS (à l’ouverture)
@@ -31,13 +31,13 @@ Welcome
 
 | Étape | Écran | Décision produit (Anthony) |
 |---|---|---|
-| **Welcome** | 01 | 4 providers + Explorer — [auth-explorer](auth-explorer.md). Pas de login obligatoire. |
+| **Welcome** | 01 | Apple + Google + magic link + Explorer — [auth-explorer](auth-explorer.md). Pas de login obligatoire. |
 | **Géoloc** | permission OS | Demande à l’ouverture. **Pas** d’écran localisation dédié avant le feed. |
 | **Autorise** | → feed | Origine = GPS ; feed « autour » au plus près. |
 | **Refuse / indispo** | → feed | Origine = **Saint-Laurent-Médoc** (allowlist). Pas de saisie ville/CP obligatoire pour continuer. |
 | **Feed** | 02a / 02b | Chips = filtres univers. Liste paginée near→far. Compteur maquette « &lt; 15 km » = **écart** (pas de bride produit). Badges OT / Agenda / Partenaire. |
 | **Tri + pagination** | sur feed | **Tri** organique = toujours **distance croissante** (near→far). **Pagination** serveur (`cursor` / pages suivantes au scroll). **Pas** de cut-off produit à 15 km. |
-| **Ordre liste** | sur feed | **Partenaires en premier** (slots boost, plafond N=3) **puis** organique **du plus près au plus loin**, dans la sélection chip / univers. Tri **Favoris** = filtre IDs (local ou cloud). |
+| **Ordre liste** | sur feed | **Partenaires en premier** (slots boost, plafond N=3) **puis** organique **du plus près au plus loin**, dans la sélection chip / univers. Tri **Favoris** = filtre IDs (cloud). |
 | **Changer de lieu** | bouton header feed | Petit bouton position actuelle (haut) → sheet / saisie **code postal ou ville** (allowlist). Déjà en maquette — voir §7. |
 | **Fiche** | 03 / 04a / 04b | OD pauvre OK ; CTA conditionnels ; pas de ★. **Toujours afficher le kilométrage** user ↔ POI (depuis l’origine feed : GPS / Saint-Laurent-Médoc / commune choisie) ; minutes piéton en plus si &lt; ~2 km. |
 | **Actions** | fiche / carte | Y aller (maps OS) · favori · liens externes. Pas de résa native MVP. |
@@ -60,28 +60,28 @@ Welcome
 |---|---|---|
 | **Loading feed** | Skeleton liste + compteur « … » ; pas de faux chiffres hardcodés. |
 | **Empty chip** | `200` + `empty` (ex. vide-greniers) · message + CTA `suggest_add` / changer de chip — déjà maquette 02b. |
-| **Empty « Favoris »** | Message « Aucun favori » + CTA explorer / chip Tout. Anonyme = locaux vides ; connecté = cloud vide. |
+| **Empty « Favoris »** | Message « Aucun favori » + CTA explorer / chip Tout. Anonyme = pas de favori (CTA connexion) ; connecté = cloud vide. |
 | **Empty partenaires (boost)** | Normal au launch (0 partenaires) — liste = organique seul ; message soft si on filtre « partenaires only » (non MVP). |
 | **Error réseau / API** | Banner + retry ; conserver dernier feed en cache si dispo. |
-| **Offline** | Lecture favoris locaux (anon) ou dernier snapshot favoris syncés (auth) ; feed live indispo → message clair. |
+| **Offline** | Favoris syncés (auth, dernier snapshot) ; anonyme = pas de favori ; feed live indispo → message clair. |
 | **Géoloc refusée / indispo** | **Ne pas bloquer** : feed immédiat avec **Saint-Laurent-Médoc**. Pas d’écran ville/CP obligatoire. User peut changer via bouton header. |
 | **Ville / CP hors allowlist** | Message « Hors périmètre Médoc » + suggestions communes proches de la liste (dans la sheet). |
 | **Sync stale** | Afficher `data_as_of` discret si &gt; seuil (ex. 48 h) — pas bloquant. |
 
 ---
 
-## 3. Favoris — local vs cloud
+## 3. Favoris : compte requis (pas de favori local anonyme)
 
 Aligné [auth-explorer](auth-explorer.md) §4 :
 
 | | Sans compte | Avec compte |
 |---|---|---|
-| Stockage | **Device local** uniquement | **Cloud** (`favorites`) + multi-appareils |
-| Sync | Non | Fusion des favoris locaux à la **1ʳᵉ** sync post-login (consentie) |
-| Tri « Favoris » | Filtre sur IDs locaux | Filtre sur IDs cloud |
-| Prompt login | Sur « sync / sauvegarder » ou CTA « compte = sans pub » | — |
+| Favoris | **Aucun** (le CTA favori invite à créer un compte) | **Cloud** (`favorites`) + sync multi-appareils |
+| Sync | — | Cloud, multi-appareils |
+| Tri « Favoris » | Non disponible | Filtre sur IDs cloud |
+| Prompt login | Sur CTA favori **ou** CTA « compte = sans pub » | — |
 
-Pas d’envoi des favoris locaux au serveur sans compte.
+Pas de favori local device : le favori devient un levier d’inscription, ce qui alimente aussi le KPI partenaires.
 
 ---
 

@@ -44,7 +44,7 @@ SECTIONS (one job each; after the fold)
 1) What it is — festif / loisir Médoc vs nature PNR (complement, not clone).
 2) What’s on the map — restos & bars, sorties, marchés & fêtes, vides-greniers, surf & côte, hint bornes VE — as a tight visual rhythm, not a feature-card wall.
 3) Honest data — sourced from open tourism/agenda data; empty states OK; no fake reviews.
-4) Account value — explore without account (ads) vs signed-in (no ads); Google / Apple / Facebook / magic link — keep light, no auth mockoverkill.
+4) Account value — explore without account (ads) vs signed-in (no ads); Google / Apple / magic link — keep light, no auth mockoverkill.
 5) Partners teaser — Essentiel / Premium boost (don’t invent partner names).
 6) Final CTA — download / waitlist tone; keep Médoc.
 

@@ -88,7 +88,7 @@ Rappel règles feed : max 3 boosts ; **1 slot réservé Premium** si éligible ;
 | Pages lecture seule Next.js | Mutations CRUD lieux / events |
 | Agrégats SQL / vues sur tables sync | CMS type Filament / admin éditorial |
 | Consommation concepts API lecture (`data_as_of`, feed empty, IRVE nearby count) | Billing / Stripe / abonnements |
-| Auth ops **simple plus tard** (voir §4) | Auth produit app (Google / Apple / Facebook / magic link) |
+| Auth ops **simple plus tard** (voir §4) | Auth produit app (Apple / Google / magic link e-mail) |
 | Liens docs conception | Dokploy / prod (après checklist) |
 
 Données lues = **cache Postgres** (même vérité que l’API app) — pas de proxy live DT/OA depuis ops.
@@ -106,7 +106,7 @@ Ou requêtes SQL directes depuis `ops/` en interne — choix d’impl post-conce
 
 ## 4. Auth ops (pas phase 1 produit)
 
-- **Auth app grand public** (Google / Apple / Facebook / magic link + explorer ; non-auth = pubs, connecté = pas de pub) = hors sujet ops — voir [auth-explorer.md](auth-explorer.md).
+- **Auth app grand public** (Apple / Google / magic link e-mail + explorer ; non-auth = pubs, connecté = pas de pub) = hors sujet ops — voir [auth-explorer.md](auth-explorer.md).
 - **Auth ops** : simple, **plus tard** (Basic Auth reverse-proxy, allowlist IP, ou magic link équipe). Pas de SSO produit, pas de comptes partenaires.
 - En conception / local : dashboard peut rester **sans auth** tant qu’il n’est pas exposé publiquement.
 

@@ -14,7 +14,7 @@ Direction UI handoff : [maquette v2 honnête data](maquette-v2-data.md). Histori
 
 ## Parcours cœur
 
-1. Welcome : **Google / Apple / Facebook / magic link** (**même device only** MVP) **ou** Explorer sans compte
+1. Welcome : **Google / Apple / magic link (e-mail)** (**même device only** MVP) **ou** Explorer sans compte
 2. Permission géoloc OS → feed immédiat (**autorise** = GPS ; **refuse** = **Saint-Laurent-Médoc** — pas d’écran ville/CP avant)
 3. Feed : chips univers ; **partenaires d’abord** puis organique **du plus près au plus loin** + **pagination** (pas de bride 15 km) ; favoris si besoin ; bouton header position → sheet CP / ville
 4. Fiches lieu / événement → **km user↔POI** + action (itinéraire, favoris, lien résa/billets externes)

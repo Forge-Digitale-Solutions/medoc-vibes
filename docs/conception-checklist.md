@@ -16,7 +16,7 @@
 | Q2 | OpenAgenda appoint ; sync bbox + allowlist ; UIDs optionnels ; DT primaire | done |
 | Q3 | **Avec PostGIS** MVP — `ST_DWithin` / order by distance / index GiST (revisit 2026-10-02 ; ex-défaut « sans » trop faible pour autour + au plus près) | done |
 | Q4 | **0 partenaires** au launch ; empty states OK (défauté) | done |
-| Auth | **Google + Apple + Facebook + magic link** + Explorer sans compte | done |
+| Auth | **Apple + Google + magic link (e-mail)** + Explorer sans compte | done |
 | Pubs | **Non-connecté = pubs (revenu)** ; **connecté = pas de pub** (cible MVP) | done |
 | Soft-fail | Brancher tôt / empty OK / Q6–10 défautés | done |
 | CMS | Mini-CMS + boost **N=3** + paliers Essentiel/Premium (1 slot Premium réservé) ; ads ≠ boost | done |
@@ -31,7 +31,7 @@
 
 | Item | Statut | Notes / cible |
 |---|---|---|
-| Auth explorer — 4 providers + Explorer + pubs | done | [auth-explorer.md](auth-explorer.md) |
+| Auth explorer — Apple + Google + magic link + Explorer + pubs | done | [auth-explorer.md](auth-explorer.md) |
 | Partner CMS — mini-spec + boost vs ads | done | [partner-cms-spec.md](partner-cms-spec.md) |
 | Soft-fail intégrations / Q6–10 | done | [integrations-soft-fail.md](integrations-soft-fail.md) |
 | Sources FR simple | done | [sources-plain.md](sources-plain.md) |

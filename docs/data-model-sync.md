@@ -262,6 +262,8 @@ Photos : stocker licence média ; **afficher seulement si licence claire** ; sin
 
 ## 4. Jobs de sync
 
+> Spec détaillée (mapping, chips, dedup, périmètre) : [ingest-spec.md](ingest-spec.md).
+
 ### Périmètre Médoc (constante produit)
 
 **Source de vérité :** allowlist **56 communes** ([perimeter-medoc.md](perimeter-medoc.md), CSV EPCI + Portes, **sans Eysines**).  
@@ -377,8 +379,8 @@ Si la « fiche sortie » est un **lieu festif** partenaire : `GET /v1/places/:id
 
 ### API auth / CMS (MVP conception — hors lecture publique)
 
-- Auth Google / Apple + sessions — [auth-explorer](auth-explorer.md)  
-- Favoris cloud (compte) ; favoris locaux (anonyme)  
+- Auth Apple / Google / magic link + sessions — [auth-explorer](auth-explorer.md) · [auth-contracts](auth-contracts.md)  
+- Favoris cloud (compte) uniquement  
 - CRUD Partner CMS (planifié MVP produit) — [partner-cms-spec](partner-cms-spec.md)
 
 ### Non-MVP API (ne pas builder maintenant)

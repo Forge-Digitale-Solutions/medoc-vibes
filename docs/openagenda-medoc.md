@@ -4,7 +4,7 @@
 **Statut Q2 :** **figé (appoint)** — UIDs shortlist **optionnels, non bloquants**  
 **Décision Anthony (2026-10-01) :** OpenAgenda = **appoint** ; sync via **bbox préfiltre** + **allowlist communes** ; **DATAtourisme = source primaire**. Pas besoin d’acter une liste blanche UIDs avant de poursuivre la conception.  
 **Méthode inventaire :** recherche publique `GET https://openagenda.com/api/agendas?search=…` (+ détail events par UID). L’API clé `api.openagenda.com/v2` n’a pas été utilisée (clé publique non configurée ici).  
-**Réf. produit :** [data-model-sync.md](data-model-sync.md) · [perimeter-medoc.md](perimeter-medoc.md) · [data-sources-audit.md](data-sources-audit.md)  
+**Réf. produit :** [data-model-sync.md](data-model-sync.md) · [perimeter-medoc.md](perimeter-medoc.md) · [data-sources-audit.md](data-sources-audit.md) · [ingest-spec.md](ingest-spec.md)  
 **Doc API OpenAgenda (LLM) :** [source officielle](https://developers.openagenda.com/llms-full.txt) (dump local non versionné)
 
 ---
@@ -40,7 +40,7 @@ La couverture OpenAgenda du **Médoc Atlantique / littoral + estuaire** est **fi
 
 4. **Hors sync OA** : marchés hebdo OT, FMA, nightlife — plutôt DT / CMS / saisie.
 
-**Clé API :** pour la prod (plus tard), `GET https://api.openagenda.com/v2/…` avec `oa_pk_…`. L’endpoint web a servi uniquement à l’inventaire.
+**Clé API :** pour la prod (plus tard), `GET https://api.openagenda.com/v2/…` avec `oa_pk_…`. L'endpoint web a servi uniquement à l'inventaire. **Note API (2026-10-24) :** les events se lisent par agenda (`GET /v2/agendas/{uid}/events`) avec filtre géo `geo[northEast]/[southWest]` (bbox) + `adminLevel2[]=Gironde` ; la lecture transverse `GET /v2/events` (toutes agendas) nécessite une demande d'accès à support@openagenda.com. Voir [ingest-spec](ingest-spec.md) §4.
 
 ---
 

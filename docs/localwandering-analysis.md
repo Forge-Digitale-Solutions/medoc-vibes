@@ -118,7 +118,7 @@ Captures : [good-practices](#) — *capture Context Cursor only (`media/gemini-a
 | Pas de bride 15 km ; near→far + pagination ; PostGIS | Directory / search BD — pas ce modèle | MV **plus avancé** côté geo feed ; ne pas reculer vers listes annuaire |
 | Partenaires d’abord (boost N=3) | Featured / top placement payant | **Aligné** en intention ; garder plafond N + distinction ads≠boost |
 | Allowlist **56 communes** EPCI | Expansion US ville par ville | **Garder** périmètre figé — pas de « national » |
-| Auth Explorer + 4 providers ; pubs si anon | Member login pour full access ; newsletter agressive | **Garder** Explorer libre ; pas de mur login |
+| Auth Explorer + 3 providers ; pubs si anon | Member login pour full access ; newsletter agressive | **Garder** Explorer libre ; pas de mur login |
 | Data OD (DT primaire, OA appoint) + soft-fail | Contenu communautaire + listings payants | **Garder** OD ; UGC/avis = plus tard |
 | Pas de ★ MVP | Avis locaux mis en avant | **Écart** — ne pas réintroduire ★ |
 | CMS partenaire planifié, 0 partenaires launch OK | Business listings dès le départ | Aligné sur **capacité** CMS ; launch vide OK |

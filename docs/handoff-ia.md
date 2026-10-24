@@ -29,7 +29,7 @@ Contexte court : [project-context.md](project-context.md)
 ## 2. Personas / parcours actés
 
 ```
-Welcome → Auth (Google / Apple / Facebook / magic link) OU Explorer sans compte
+Welcome → Auth (Google / Apple / magic link e-mail) OU Explorer sans compte
        → Permission géoloc OS
             ├─ OK  → origine = GPS
             └─ refus / indispo → origine = Saint-Laurent-Médoc
@@ -63,7 +63,7 @@ Ne **pas** rouvrir sans demande explicite Anthony.
 | Data | DATAtourisme **primaire** ; OpenAgenda **appoint** ; soft-fail empty OK |
 | Geo | **PostGIS** MVP (`geom` + GiST ; order distance serveur) |
 | Launch partenaires | **0 partenaires** OK ; empty states |
-| Auth | Google + Apple + Facebook + magic link + Explorer |
+| Auth | Google + Apple + magic link (e-mail) + Explorer |
 | Pubs | Non-connecté = pubs (revenu) ; connecté = **pas de pub** |
 | CMS | Mini-CMS headless **planifié MVP** ; comptes métier ≠ OAuth conso |
 | Boost | Plafond **N=3** ; plans Essentiel / Premium (1 slot Premium réservé) ; **ads ≠ boost** |
@@ -146,7 +146,7 @@ Base path lecture : `/v1` · Spec : [api-contracts.md](api-contracts.md) · [ope
 | `GET /v1/feed/around` | **Implémenté** (seed local) — partenaires first, near→far, `cursor` |
 | `GET /v1/feed/around/count` | Implémenté |
 | `GET /v1/places/:id` · `events/:id` · IRVE nearby | **Non livrés** (contrat conception) |
-| Auth starter `/api/v1/auth/*` | Scaffold kit (≠ OAuth produit Google/Apple/FB/magic) |
+| Auth starter `/api/v1/auth/*` | Scaffold kit (≠ OAuth produit Google/Apple/magic) |
 | Ingest DT/OA | Stub `ingest_todo.ts` |
 
 Règles feed : pas de `rating` ; `radius_km` optionnel technique ; `commune` = origine, pas filtre d’inclusion.
@@ -157,9 +157,9 @@ Règles feed : pas de `rating` ; `radius_km` optionnel technique ; `commune` = o
 
 | Sujet | Résumé | Doc |
 |---|---|---|
-| Auth conso | 4 providers + Explorer | [auth-explorer.md](auth-explorer.md) |
+| Auth conso | Apple + Google + magic link (e-mail) + Explorer | [auth-explorer.md](auth-explorer.md) · [auth-contracts.md](auth-contracts.md) |
 | Pubs | Anonyme = ads ; compte = sans pub | idem |
-| Favoris | Local device (anon) / cloud (auth) | idem |
+| Favoris | Cloud uniquement (compte requis) | idem |
 | CMS partenaire | CRUD fiche + events ; plans Essentiel/Premium ; boost N=3 | [partner-cms-spec.md](partner-cms-spec.md) |
 | Attribution offline | Proxies (clics, montre l’écran…) — pas de promesse carte bancaire | [product-notes.md](product-notes.md) |
 
@@ -350,11 +350,14 @@ Chaque entrée = 1 ligne. Chemins relatifs sous `docs/` sauf indication.
 | [project-context.md](project-context.md) | Contexte produit + stack + phase (résumé) |
 | [conception-checklist.md](conception-checklist.md) | Décisions figées + livrables conception |
 | [app-journey-brainstorm.md](app-journey-brainstorm.md) | Parcours écrans, géoloc, feed, Q1–Q5 |
-| [auth-explorer.md](auth-explorer.md) | Auth 4 providers, Explorer, pubs |
+| [auth-explorer.md](auth-explorer.md) | Auth Apple/Google/magic link, Explorer, pubs |
+| [auth-contracts.md](auth-contracts.md) | Contrats API auth + favoris (v1) |
 | [partner-cms-spec.md](partner-cms-spec.md) | CMS partenaire, Essentiel/Premium, boost N=3 |
+| [partner-cms-contracts.md](partner-cms-contracts.md) | Spec technique CMS partenaire (web, auth métier, Stripe, KPI) |
 | [api-contracts.md](api-contracts.md) | Contrats lecture v1 (humain) |
 | [openapi-v1.yaml](openapi-v1.yaml) | OpenAPI machine-readable |
 | [data-model-sync.md](data-model-sync.md) | Schéma Postgres/PostGIS + plan sync |
+| [ingest-spec.md](ingest-spec.md) | Spec ingest DATAtourisme + OpenAgenda (mapping, chips, dedup) |
 | [data-sources-audit.md](data-sources-audit.md) | Audit sources ouvertes |
 | [sources-plain.md](sources-plain.md) | Sources en FR non-tech |
 | [perimeter-medoc.md](perimeter-medoc.md) | Allowlist 56 communes |

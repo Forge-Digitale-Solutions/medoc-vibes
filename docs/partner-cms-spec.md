@@ -2,7 +2,7 @@
 
 **Date :** 2026-10-01 (Anthony — paliers Essentiel/Premium + plafond boost N=3)  
 **Statut :** conception — **planifié dans le MVP produit** (pas « post-MVP forever »)  
-**Réf. :** [product-notes.md](product-notes.md) · [data-model-sync.md](data-model-sync.md) · [auth-explorer.md](auth-explorer.md) · [maquette-v2-data.md](maquette-v2-data.md) · [api-contracts.md](api-contracts.md) · [ops-kpi.md](ops-kpi.md) · [project-context.md](project-context.md)
+**Réf. :** [product-notes.md](product-notes.md) · [data-model-sync.md](data-model-sync.md) · [auth-explorer.md](auth-explorer.md) · [maquette-v2-data.md](maquette-v2-data.md) · [api-contracts.md](api-contracts.md) · [ops-kpi.md](ops-kpi.md) · [project-context.md](project-context.md) · [partner-cms-contracts.md](partner-cms-contracts.md)
 
 ---
 
@@ -28,7 +28,9 @@ Source sync : `partner_cms` → badge UI **Partenaire** · priorité dedup haute
 | Events | CRUD : title, dates, chip, price_label, geo ou héritage lieu, ticket/registration/website URLs, media |
 | Compte Partner | `name`, `slug`, `status` (`draft`\|`active`\|`paused`), `plan` (`essentiel`\|`premium`), `cms_enabled` |
 
-**Droits :** un compte partenaire n’édite **que** ses `place_id` / `event` liés (`partner_id`). Pas d’admin global dans le CMS partenaire. Compte CMS ≠ compte utilisateur app (Google / Apple / Facebook / magic link) — voir [auth-explorer](auth-explorer.md).
+**Droits :** un compte partenaire n’édite **que** ses `place_id` / `event` liés (`partner_id`). Pas d’admin global dans le CMS partenaire. Compte CMS ≠ compte utilisateur app (Apple / Google / magic link e-mail) — voir [auth-explorer](auth-explorer.md).
+
+Spec technique (surface web, auth métier, Stripe, KPI, endpoints) : [partner-cms-contracts.md](partner-cms-contracts.md).
 
 ---
 
@@ -107,7 +109,7 @@ Rotation : si plusieurs Premium (ou Essentiel) pour le même rôle de slot → r
 | **Interdit** | Pubs plein écran bloquantes *partenaire*, autoplay sonore, faux compteurs, CTA trompeurs, boost sans abo `active` |
 | **Attribution clics** | Itinéraire / appeler / site / réserver + UTM — vague ultérieure ; pas de preuve CB MVP |
 
-**Paiement partenaire :** abonnement **hors app** (facture / Stripe ops ou manuel). **Aucun paiement in-app** utilisateur ni partenaire au lancement CMS.
+**Paiement partenaire :** abonnement **hors app** (facture / Stripe ops ou manuel). **Aucun paiement in-app** utilisateur ni partenaire au lancement CMS. Cadrage des réglages de facturation : [billing-settings.md](billing-settings.md).
 
 Rappel ads free users : [auth-explorer.md](auth-explorer.md) — non-connecté = pubs ; connecté = **pas de pub**. Ads ≠ ces slots boost.
 
