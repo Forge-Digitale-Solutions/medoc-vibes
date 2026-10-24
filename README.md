@@ -39,7 +39,7 @@ npm run dev
 # Ops KPI — http://localhost:4311
 cd ../ops && npm run dev
 
-# Landing — http://localhost:4310
+# Landing — http://127.0.0.1:43127
 cd ../site && npm run dev
 ```
 

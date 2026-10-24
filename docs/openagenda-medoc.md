@@ -5,7 +5,7 @@
 **Décision Anthony (2026-10-01) :** OpenAgenda = **appoint** ; sync via **bbox préfiltre** + **allowlist communes** ; **DATAtourisme = source primaire**. Pas besoin d’acter une liste blanche UIDs avant de poursuivre la conception.  
 **Méthode inventaire :** recherche publique `GET https://openagenda.com/api/agendas?search=…` (+ détail events par UID). L’API clé `api.openagenda.com/v2` n’a pas été utilisée (clé publique non configurée ici).  
 **Réf. produit :** [data-model-sync.md](data-model-sync.md) · [perimeter-medoc.md](perimeter-medoc.md) · [data-sources-audit.md](data-sources-audit.md)  
-**Doc API OpenAgenda (LLM) :** [copie locale](openagenda-llms-full.txt) · [source officielle](https://developers.openagenda.com/llms-full.txt)
+**Doc API OpenAgenda (LLM) :** [source officielle](https://developers.openagenda.com/llms-full.txt) (dump local non versionné)
 
 ---
 

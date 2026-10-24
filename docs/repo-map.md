@@ -42,7 +42,7 @@
 ```text
 npm install          # racine
 npm run dev:api      # :3333
-npm run dev:site     # :4310
+npm run dev:site     # http://127.0.0.1:43127
 npm run dev:ops      # :4311
 ```
 
