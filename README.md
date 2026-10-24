@@ -2,6 +2,8 @@
 
 Monorepo for the **Médoc Vibes** tourism app (food, nightlife, local leisure in the Médoc): API, ops dashboard, landing, shared contracts, native app stubs.
 
+**IA / handoff :** start at [`docs/handoff-ia.md`](docs/handoff-ia.md) (single entry; secrets stay out of git — Dokploy / vault).
+
 ## Structure
 
 | Path | Role |
@@ -10,6 +12,7 @@ Monorepo for the **Médoc Vibes** tourism app (food, nightlife, local leisure in
 | `ops/` | Lightweight **Next.js** KPI dashboard |
 | `site/` | **Next.js** landing placeholder |
 | `packages/shared` | Shared TypeScript types + OpenAPI stub |
+| `docs/` | Project handoff + product/tech docs ([`handoff-ia.md`](docs/handoff-ia.md)) |
 | `ios/` | SwiftUI placeholder (+ README) |
 | `android/` | Kotlin/Compose placeholder (+ README) |
 
