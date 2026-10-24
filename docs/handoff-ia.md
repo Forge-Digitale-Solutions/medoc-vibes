@@ -315,7 +315,7 @@ npm run dev   # http://127.0.0.1:3333
 curl -sS 'http://127.0.0.1:3333/v1/feed/around?lat=45.1502&lon=-0.8235&chip=tout&limit=10'
 
 # Landing
-cd ../site && cp .env.example .env && npm run dev   # :4310
+cd ../site && cp .env.example .env && npm run dev   # http://127.0.0.1:43127
 
 # Ops (optionnel)
 cd ../ops && npm run dev   # :4311
@@ -360,7 +360,7 @@ Chaque entrée = 1 ligne. Chemins relatifs sous `docs/` sauf indication.
 | [perimeter-medoc.md](perimeter-medoc.md) | Allowlist 56 communes |
 | [data/medoc-communes-codes-postaux.csv](../data/medoc-communes-codes-postaux.csv) | CSV allowlist |
 | [openagenda-medoc.md](openagenda-medoc.md) | Inventaire OpenAgenda Médoc |
-| [openagenda-llms-full.txt](openagenda-llms-full.txt) | Dump doc API OpenAgenda (LLM) |
+| [llms-full.txt (OpenAgenda)](https://developers.openagenda.com/llms-full.txt) | Doc API OpenAgenda (LLM) — dump local non versionné |
 | [integrations-soft-fail.md](integrations-soft-fail.md) | Soft-fail / empty OK |
 | [deploy-workflow.md](deploy-workflow.md) | Flux GHCR → Dokploy site |
 | [dokploy-atasoif-reference.md](dokploy-atasoif-reference.md) | Référence panel atasoif |

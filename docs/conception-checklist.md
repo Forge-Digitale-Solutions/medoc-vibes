@@ -51,7 +51,7 @@
 | Audit sources data | [data-sources-audit.md](data-sources-audit.md) |
 | Modèle data + plan sync | [data-model-sync.md](data-model-sync.md) |
 | Périmètre 56 communes + CSV | [perimeter-medoc.md](perimeter-medoc.md) |
-| Inventaire OpenAgenda | [openagenda-medoc.md](openagenda-medoc.md) · [doc LLM API](openagenda-llms-full.txt) ([source](https://developers.openagenda.com/llms-full.txt)) |
+| Inventaire OpenAgenda | [openagenda-medoc.md](openagenda-medoc.md) · [doc LLM API](https://developers.openagenda.com/llms-full.txt) (dump local non versionné) |
 | Diagrammes FigJam | [diagrams.md](diagrams.md) · [board](https://www.figma.com/board/JwcGzdNFMIn1MRnA3WLWwa) |
 | Maquettes v2 honnêtes data | [maquette-v2-data.md](maquette-v2-data.md) · [maquettes-vs-data.md](maquettes-vs-data.md) |
 | Notes produit / remotes | [product-notes.md](product-notes.md) · [remotes.md](remotes.md) |
