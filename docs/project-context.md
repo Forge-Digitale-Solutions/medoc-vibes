@@ -50,7 +50,7 @@ Fil conducteur : **ce qui fait vivre le Médoc** (vie locale + tourisme loisir).
 
 - **Non connecté = pubs réseau** → revenu (free users).
 - **Connecté = pas de pub** (cible MVP) — échange de valeur vs compte.
-- Partenaires (restos, bars…) : **abonnement mensuel** — plans **Essentiel** / **Premium** → badge + **boost** plafonné **N=3** (1 slot réservé Premium si éligible ; ≠ ads free).
+- Partenaires (restos, bars…) : **abonnement mensuel** — plans **Essentiel** / **Premium** → badge + **boost** plafonné **N=3** (1 slot réservé **Premium** + 1 slot réservé **Essentiel** ; ≠ ads free).
 - Accès **petit CMS headless** planifié MVP produit ; **0 partenaires au launch** OK.
 - Problème ouvert : **preuve / attribution** qu’un client est passé par l’app (voir [product-notes](product-notes.md)).
 

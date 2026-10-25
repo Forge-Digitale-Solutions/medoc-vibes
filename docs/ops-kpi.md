@@ -74,10 +74,10 @@ Quand peuplé :
 | Compteurs par `plan` | **Essentiel** vs **Premium** |
 | Places / events avec `partner_id` | CMS live |
 | Items `partner_boost = true` | Vs plafond **N=3** / page feed |
-| Slot Premium réservé | Bool / ratio : parmi les feeds sondés, le slot Premium est-il rempli quand un Premium est éligible ? |
+| Slots réservés (Premium / Essentiel) | Bool / ratio : parmi les feeds sondés, les slots Premium et Essentiel sont-ils remplis quand un partenaire éligible existe ? |
 | Liste partenaires active / paused | Ops commercial léger |
 
-Rappel règles feed : max 3 boosts ; **1 slot réservé Premium** si éligible ; sinon remplir Essentiel puis organique — [partner-cms-spec](partner-cms-spec.md) §6.
+Rappel règles feed : max 3 boosts ; **1 slot réservé Premium** + **1 slot réservé Essentiel** ; puis Premium/Essentiel restants, enfin organique — [partner-cms-spec](partner-cms-spec.md) §6.
 
 ---
 

@@ -19,7 +19,7 @@
 | Auth | **Apple + Google + magic link (e-mail)** + Explorer sans compte | done |
 | Pubs | **Non-connecté = pubs (revenu)** ; **connecté = pas de pub** (cible MVP) | done |
 | Soft-fail | Brancher tôt / empty OK / Q6–10 défautés | done |
-| CMS | Mini-CMS + boost **N=3** + paliers Essentiel/Premium (1 slot Premium réservé) ; ads ≠ boost | done |
+| CMS | Mini-CMS + boost **N=3** + paliers Essentiel/Premium (1 slot Premium + 1 slot Essentiel réservés) ; ads ≠ boost | done |
 | Parcours | Géoloc → feed ; refus = **Saint-Laurent-Médoc** ; partenaires d’abord ; bouton CP/ville sur feed (Q1/Q2 actées) | done — [app-journey-brainstorm.md](app-journey-brainstorm.md) |
 | Portée feed (parcours Q4) | **Pas de bride 15 km** ; tri near→far + pagination `cursor` ; pas de sélecteur 5/15/30 ; rayon PostGIS éventuel = perf technique seulement | done — Anthony 2026-10-05 (clarif) |
 | Point défaut (parcours Q5) | **Saint-Laurent-Médoc** (pas Lacanau) ; coords à tirer du centroïde allowlist | done — Anthony 2026-10-05 |

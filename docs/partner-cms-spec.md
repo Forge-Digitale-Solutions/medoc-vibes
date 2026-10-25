@@ -1,6 +1,6 @@
 # Partner CMS — mini-spec headless
 
-**Date :** 2026-10-01 (Anthony — paliers Essentiel/Premium + plafond boost N=3)  
+**Date :** 2026-10-01 (Anthony — paliers Essentiel/Premium + plafond boost N=3) · **Maj 2026-10-24 :** slot Essentiel réservé ajouté (§5, §6.2)  
 **Statut :** conception — **planifié dans le MVP produit** (pas « post-MVP forever »)  
 **Réf. :** [product-notes.md](product-notes.md) · [data-model-sync.md](data-model-sync.md) · [auth-explorer.md](auth-explorer.md) · [maquette-v2-data.md](maquette-v2-data.md) · [api-contracts.md](api-contracts.md) · [ops-kpi.md](ops-kpi.md) · [project-context.md](project-context.md) · [partner-cms-contracts.md](partner-cms-contracts.md)
 
@@ -68,8 +68,8 @@ Deux plans abo hors app (`partners.plan`) :
 
 | Plan | Intention | Boost |
 |---|---|---|
-| **Essentiel** | Présence CMS + badge Partenaire + éligible boost | Participe aux slots boost « ouverts » |
-| **Premium** | Même chose + **priorité** sur 1 slot réservé | Remplit d’abord le slot Premium réservé |
+| **Essentiel** | Présence CMS + badge Partenaire + éligible boost | **1 slot réservé** (si ≥1 Essentiel éligible) |
+| **Premium** | Même chose + **priorité** sur le slot restant | **1 slot réservé** (si ≥1 Premium éligible) |
 
 Tarifs / features CMS détaillées (quota médias, multi-lieux…) = hors scope cette mini-spec — le différenciateur feed figé ici = **règle de slots** §6.
 
@@ -89,14 +89,21 @@ Max **3** items `partner_boost` dans une page feed (même rayon / chip). Au-del�
 
 Dans le pool d’items partenaires **éligibles** (abo `active`, dans rayon/chip, boostable) :
 
-| Slot | Règle |
+| Priorité | Règle |
 |---|---|
-| **1 slot réservé Premium** | Si ≥1 Premium éligible → **obligatoirement** 1 item Premium dans les 3 |
-| **2 slots restants** | Essentiel **ou** Premium (remplir Premium si plus d’éligibles Premium) |
-| **Aucun Premium éligible** | Les 3 slots se remplissent avec Essentiel ; s’il n’y en a pas assez → moins de 3 boosts, puis **organique** |
+| **1. Slot Premium réservé** | Si ≥1 Premium éligible → 1 Premium obligatoire |
+| **2. Slot Essentiel réservé** | Si ≥1 Essentiel éligible → 1 Essentiel obligatoire |
+| **3. Slots restants** | Premium éligibles restants d’abord, puis Essentiel restants, puis **organique** |
 | **Moins de 3 boostables au total** | Afficher ce qu’il y a ; le reste = organique — ne pas inventer de slots vides « pub partenaire » |
 
-**Ordre d’affichage proposé :** d’abord le Premium réservé (si présent), puis les autres boosts (Premium restants / Essentiel), puis organique. Ne pas masquer le reste du Médoc.
+**Composition selon l’offre (figé) :**
+- 0 Premium + ≥3 Essentiel → 3 Essentiel
+- 1 Premium + ≥2 Essentiel → 1 Premium + 2 Essentiel
+- 2 Premium + ≥1 Essentiel → 2 Premium + 1 Essentiel
+- ≥3 Premium + ≥1 Essentiel → 2 Premium + 1 Essentiel (le slot Essentiel est préservé)
+- ≥3 Premium + 0 Essentiel → 3 Premium
+
+**Ordre d’affichage (figé) :** les boosts **Premium** passent devant les boosts **Essentiel**, puis le reste **organique** (non-partenaires). Ne pas masquer le reste du Médoc.
 
 Rotation : si plusieurs Premium (ou Essentiel) pour le même rôle de slot → rotation équitable (round-robin / seed session), pas toujours le même.
 
@@ -137,11 +144,11 @@ Sans partenaires : `partner_boost` toujours false ; règles ci-dessus déjà câ
 - Santé sync (`sync_runs`, compteurs DT/OA/IRVE)
 - Compteurs feed / empty chips
 - Liste partenaires `status` / `plan` (**Essentiel** vs **Premium**)
-- **Boosts actifs / plafond N=3** + indicateur « slot Premium réservé rempli ? »
+- **Boosts actifs / plafond N=3** + indicateur « slots Premium / Essentiel réservés remplis ? »
 - (Plus tard) inventaire ads / fill rate — hors CMS partenaire
 
 Le CMS partenaire **n’est pas** le dashboard ops. Curation manuelle ops ponctuelle = process humain de secours, pas substitut au CMS commerçant.
 
 ---
 
-*Conception seule — pas de scaffold CMS ni Dokploy. Plafond boost N=3 + 1 slot Premium réservé = figé Anthony. Ads free users → auth-explorer.*
+*Conception seule — pas de scaffold CMS ni Dokploy. Plafond boost N=3 + 1 slot Premium réservé + 1 slot Essentiel réservé = figé Anthony (maj 2026-10-24). Ads free users → auth-explorer.*

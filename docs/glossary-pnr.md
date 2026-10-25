@@ -100,7 +100,7 @@ Zone grossière « triangle Médoc » évoquée en cadrage : même statut que bb
 | Terme | Sens court |
 |---|---|
 | `sync_runs` | Journal d’une exécution de job d’import source |
-| `partner_boost` | Bool feed : remonter un item partenaire abo (≠ ads free) ; max **3** / page ; **1 slot réservé Premium** |
+| `partner_boost` | Bool feed : remonter un item partenaire abo (≠ ads free) ; max **3** / page ; **1 slot réservé Premium + 1 slot réservé Essentiel** |
 | IRVE | Borne recharge VE (snapshot PAN, pas live) |
 | Explorer sans compte | Parcours anonyme + **pubs** ([auth-explorer](auth-explorer.md)) |
 | Connecté | Compte Google/Apple/FB/magic link → **pas de pub** (MVP) |

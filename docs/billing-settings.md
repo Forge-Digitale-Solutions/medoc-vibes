@@ -154,7 +154,7 @@ Qui fait quoi, du démarchage à la suspension.
 
 **Propagation `active` / `paused` au boost et au CMS :**
 
-- Seuls les partenaires **`active`** sont éligibles au boost. La règle de slots N=3 et le slot Premium réservé ([partner-cms-spec](partner-cms-spec.md) §6) ne se calculent que sur ce pool.
+- Seuls les partenaires **`active`** sont éligibles au boost. La règle de slots N=3 (slots Premium et Essentiel réservés) ([partner-cms-spec](partner-cms-spec.md) §6) ne se calcule que sur ce pool.
 - `paused` = exclu du pool boostable et du badge, sans supprimer la fiche (soft). `draft` = jamais exposé.
 - **Non-paiement / abo inactif** (2026-10-24) : `status = paused` **immédiatement** (pas de grace). Le partenaire **conserve compte et contenu**, mais le CMS passe en **delete-only** : plus de POST / update, seulement supprimer.
 - `cms_enabled` contrôle l'accès au CMS ; `status` contrôle la visibilité et le boost. Deux leviers indépendants.
@@ -219,7 +219,7 @@ Au MVP, ops crée / encaisse (via **Stripe Invoicing**) / suspend. Le dashboard 
 ## Prochaines actions (à ne pas faire maintenant)
 
 1. Rédiger la migration additive `partners` (`plan`, `cms_enabled`, colonnes billing nullable), backward-safe.
-2. Brancher le filtre `status = active` dans le calcul de boost (règle N=3 / slot Premium réservé).
+2. Brancher le filtre `status = active` dans le calcul de boost (règle N=3 / slots Premium + Essentiel réservés).
 3. Préparer l'Option B Stripe Invoicing quand le volume le justifie (clé + webhook hors git, mapping Stripe vers `partners`).
 4. Ajouter la vue lecture `partners` (`status` / `plan`) au dashboard ops, déjà prévue dans [ops-kpi](ops-kpi.md) §2.5.
 5. Trancher avec Anthony les questions du §7 (tarifs, seuil, `paused` vs CMS, grace period).

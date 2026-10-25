@@ -66,7 +66,7 @@ Ne **pas** rouvrir sans demande explicite Anthony.
 | Auth | Google + Apple + magic link (e-mail) + Explorer |
 | Pubs | Non-connecté = pubs (revenu) ; connecté = **pas de pub** |
 | CMS | Mini-CMS headless **planifié MVP** ; comptes métier ≠ OAuth conso |
-| Boost | Plafond **N=3** ; plans Essentiel / Premium (1 slot Premium réservé) ; **ads ≠ boost** |
+| Boost | Plafond **N=3** ; 1 slot réservé **Premium** + 1 slot réservé **Essentiel** ; **ads ≠ boost** |
 | Feed | Partenaires first · near→far · pagination · **pas** cut-off 15 km |
 | Défaut geo | Saint-Laurent-Médoc |
 | Magic link | Même device only |
@@ -160,7 +160,7 @@ Règles feed : pas de `rating` ; `radius_km` optionnel technique ; `commune` = o
 | Auth conso | Apple + Google + magic link (e-mail) + Explorer | [auth-explorer.md](auth-explorer.md) · [auth-contracts.md](auth-contracts.md) |
 | Pubs | Anonyme = ads ; compte = sans pub | idem |
 | Favoris | Cloud uniquement (compte requis) | idem |
-| CMS partenaire | CRUD fiche + events ; plans Essentiel/Premium ; boost N=3 | [partner-cms-spec.md](partner-cms-spec.md) |
+| CMS partenaire | CRUD fiche + events ; plans Essentiel/Premium ; boost N=3 (1 slot réservé par plan) | [partner-cms-spec.md](partner-cms-spec.md) |
 | Attribution offline | Proxies (clics, montre l’écran…) — pas de promesse carte bancaire | [product-notes.md](product-notes.md) |
 
 ---
